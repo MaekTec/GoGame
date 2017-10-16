@@ -1,7 +1,7 @@
-htwg-scala-seed
+Go in Scala
 =========================
 
-This is a seed project to create a basic scala project as used in the
+This is a implementation of Go in Scala for the SE the
 class Software Engineering at the University of Applied Science HTWG Konstanz
 
 * Has a folder structure prepared for a MVC-style application
