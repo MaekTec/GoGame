@@ -1,12 +1,5 @@
-case class Cell(x:Int, y:Int)
+import de.htwg.se.djokajkaeppeler.model.{CellStatus, Grid}
 
-val cell1 = Cell(4,5)
-cell1.x
-cell1.y
-
-case class Field(cells: Array[Cell])
-
-val field1 = Field(Array.ofDim[Cell](1))
-field1.cells(0)=cell1
-field1.cells(0).x
-field1.cells(0).y
+val grid = new Grid(9, CellStatus.EMPTY)
+grid.setCell(0, 0, CellStatus.BLACK)
+grid.getCell(0, 1).equals(CellStatus.EMPTY)
