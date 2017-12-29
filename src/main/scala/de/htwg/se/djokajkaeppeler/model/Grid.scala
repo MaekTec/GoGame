@@ -1,9 +1,9 @@
 package de.htwg.se.djokajkaeppeler.model
 
-case class Grid(cells:Vector[Vector[CellStatus.Value]]) {
-  def this(size:Int, filling:CellStatus.Value) = this(Vector.tabulate(size, size) {(row, col) => filling})
+case class Grid(private val cells:Matrix[Cell]) {
+  def this(size:Int) = this(new Matrix[Cell](size, Cell(CellStatus.EMPTY)))
   val size:Int = cells.size
-  def getCell(row:Int, col:Int) :CellStatus.Value = cells (row)(col)
-  def fill(filling:CellStatus.Value):Grid = copy(Vector.tabulate(size, size) {(row, col) => filling})
-  def setCell(row:Int, col:Int, cell:CellStatus.Value):Grid = copy(cells.updated(row, cells(row).updated(col, cell)))
+  def cell(row:Int, col:Int):Cell = cells.cell(row, col)
+  def set(row:Int, col:Int, value:Cell):Grid = copy(cells.replaceCell(row, col, value))
+
 }
