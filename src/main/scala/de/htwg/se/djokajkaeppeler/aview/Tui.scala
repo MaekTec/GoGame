@@ -1,27 +1,50 @@
 package de.htwg.se.djokajkaeppeler.aview
 
-import de.htwg.se.djokajkaeppeler.model._
+import de.htwg.se.djokajkaeppeler.controller.Controller
+import de.htwg.se.djokajkaeppeler.util.Observer
 
-class Tui {
-  def processInputLine(input: String, grid:Grid):Grid = {
-    input match {
-      case "q" => grid
-      case "n" => new Grid(11)
-      case _ => {
-        input.toList.filter(c => c != ' ').map(c => c.toString.toInt) match {
-          case row :: column :: value :: Nil => grid.set(row, column, intToCell(value))
-          case _ => grid
+class Tui(controller: Controller) extends Observer {
+
+  controller.add(this)
+  val size = 11
+  var players: (String, String) = ("Player 1", "Player 2")
+
+  println("Eingabeformat:")
+  println("New game: n [Gridsize] [Player 1 name] [Player 2 name]")
+  println("In game: row colum")
+
+  def processInputLine(input: String): Unit = {
+    val in = input.split(" ")
+    if (in.nonEmpty) {
+      in(0) match {
+        case "q" =>
+        case "n" => {
+          var newSize = size
+          var player = players
+          if (in.length >= 2) {
+            newSize = in(1).toInt
+            if (in.length >= 4) {
+              player = (in(2), in(3))
+            }
+          }
+          controller.createEmptyGrid(newSize, player)
         }
+        case "s" => controller.skipTurn()
+        case _ => processInputMove(in)
       }
     }
   }
 
-  def intToCell(v: Int): Cell = {
-    v match {
-      case 0 => new Cell(CellStatus.EMPTY)
-      case 1 => new Cell(CellStatus.BLACK)
-      case 2 => new Cell(CellStatus.WHITE)
-      case _ => new Cell(CellStatus.EMPTY)
+  def processInputMove(in: Array[String]): Unit = {
+    in.toList.filter(c => c != " ").map(c => c.toInt) match {
+      case row :: column :: Nil => controller.turn(row, column)
+      case row :: column :: value :: Nil => controller.set(row, column, value)
+      case _ =>
     }
+  }
+
+  override def update: Unit = {
+    println(controller.gridToString)
+    println(controller.playerAtTurnToString + " is at turn")
   }
 }

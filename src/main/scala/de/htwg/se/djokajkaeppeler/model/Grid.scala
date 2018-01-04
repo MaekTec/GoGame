@@ -9,12 +9,17 @@ case class Grid(private val cells:Matrix[Cell]) {
 
   def cell(row:Int, col:Int):Cell = cells.cell(row, col)
   def set(row:Int, col:Int, value:Cell):Grid = copy(cells.replaceCell(row, col, value))
+  def cellIsSet(row:Int, col:Int):Boolean = cells.cell(row, col).isSet
 
-
+  def indexToRowCol(index: Int): (Int, Int) = {
+    val r = index / size
+    val c = index % size
+    (r, c)
+  }
 
   override def toString: String = {
-    val lineseparator = ("|" + "---+" * (size-1) + "---|\n")
-    val line = ("| x "* size + "|\n")
+    val lineseparator = "|" + "---+" * (size-1) + "---|\n"
+    val line = "| x "* size + "|\n"
     var box = "\n" + (lineseparator + line) * size + lineseparator
     for {
       row <- 0 until size
