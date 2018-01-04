@@ -29,14 +29,18 @@ class Tui(controller: Controller) extends Observer {
           }
           controller.createEmptyGrid(newSize, player)
         }
-        case _ => in.toList.filter(c => c != " ").map(c => c.toInt) match {
-          case row :: column :: Nil => controller.turn(row, column)
-          case row :: column :: value :: Nil => controller.set(row, column, value)
-          case _ =>
-        }
+        case "s" => controller.skipTurn()
+        case _ => processInputMove(in)
       }
     }
+  }
 
+  def processInputMove(in: Array[String]): Unit = {
+    in.toList.filter(c => c != " ").map(c => c.toInt) match {
+      case row :: column :: Nil => controller.turn(row, column)
+      case row :: column :: value :: Nil => controller.set(row, column, value)
+      case _ =>
+    }
   }
 
   override def update: Unit = {

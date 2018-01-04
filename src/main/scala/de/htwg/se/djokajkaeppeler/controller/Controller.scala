@@ -6,7 +6,7 @@ import de.htwg.se.djokajkaeppeler.util.Observable
 class Controller(var game:Game) extends Observable{
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {
     val grid = new Grid(size)
-    game = Game(grid, (Player(player._1, CellStatus.BLACK), Player(player._2, CellStatus.WHITE)))
+    game = Game(grid, (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE))))
     notifyObservers
   }
 
@@ -14,11 +14,18 @@ class Controller(var game:Game) extends Observable{
   def playerAtTurnToString: String = game.playerAtTurn.name
 
   def turn(row: Int, col: Int): Unit = {
-    if (row >= 0 && row < game.grid.size && col >= 0 && col < game.grid.size && !game.grid.cellIsSet(row, col)) {
-      game.grid = game.grid.set(row, col, Cell(game.playerAtTurn.cellstatus))
-      game.nextTurn
-      notifyObservers
+    game.turn(row, col) match {
+      case Some(newGame) => {
+        game = newGame
+        notifyObservers
+      }
+      case None =>
     }
+  }
+
+  def skipTurn(): Unit = {
+    game = game.skipTurn()
+    notifyObservers
   }
 
   def set(row: Int, col: Int, value: Int):Unit = {
