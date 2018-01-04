@@ -8,18 +8,34 @@ case class Game(var grid: Grid, var player: (Player, Player)) {
   def turn(row: Int, col: Int): Option[Game] = {
     if (rowColIsValid(row, col) && !grid.cellIsSet(row, col)) {
       var newGame = copy(grid.set(row, col, playerAtTurn.cellstatus), player)
-      val check = newGame.checkForHits(row, col)
-      println("Remove: " + check)
-      check match {
-        case Some(c) => c.foreach(rc => newGame = copy(newGame.grid.set(rc._1, rc._2, Cell(CellStatus.EMPTY)), player))
-        case None =>
+      if (newGame.checkIfMoveIsValid(row, col, playerAtTurn.cellstatus)) {
+        val check = newGame.checkForHits(row, col)
+        //println("Remove: " + check)
+        check match {
+          case Some(c) => c.foreach(rc => newGame = copy(newGame.grid.set(rc._1, rc._2, Cell(CellStatus.EMPTY)), player))
+          case None =>
+        }
+        Some(copy(newGame.grid, newGame.player.swap))
+      } else {
+        None
       }
-      Some(copy(newGame.grid, newGame.player.swap))
     } else {
       None
     }
   }
 
+  def checkIfMoveIsValid(row: Int, col: Int, cell: Cell): Boolean = checkSuicideBan(row, col, cell)
+
+  // Check if a Cell has freedoms, if not the move is not valid because this would be suicide
+  def checkSuicideBan(row: Int,  col: Int, cell: Cell): Boolean = {
+    //println("Cells:" + checkIfCellHasFreedoms(row, col, cell, Set.empty))
+    checkIfCellHasFreedoms(row, col, cell, Set.empty) match {
+      case None => true //Has freedoms
+      case Some(cells) => cells.isEmpty //if empty -> has freedoms, else set of stones with no freedoms
+    }
+  }
+
+  // Checks if player beat the other player, so the other players stones has no freeedoms anymore
   def checkForHits(row: Int, col: Int): Option[Set[(Int, Int)]] = {
     var cells: Set[(Int, Int)] = Set.empty
     for (cell <- getCellsAround(row, col)
@@ -34,6 +50,7 @@ case class Game(var grid: Grid, var player: (Player, Player)) {
   }
 
   // TODO better visited Set
+  // returns Cells with no freedoms, or none if the cell has freedoms
   def checkIfCellHasFreedoms(row: Int, col: Int, cell: Cell, visited: Set[(Int, Int)]): Option[Set[(Int, Int)]] = {
     val visitedNew = visited + ((row, col))
     grid.cell(row, col).status match {
