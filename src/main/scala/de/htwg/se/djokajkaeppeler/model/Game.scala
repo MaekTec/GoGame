@@ -1,7 +1,12 @@
 package de.htwg.se.djokajkaeppeler.model
 
-case class Game(var grid: Grid, var player: (Player, Player)) {
+case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean) {
+  def this(grid: Grid, player: (Player, Player)){
+    this(grid,player,false)
+  }
   var playerAtTurn : Player = player._1
+
+
 
   def this(grid:Grid, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
 
@@ -28,10 +33,14 @@ case class Game(var grid: Grid, var player: (Player, Player)) {
 
   // Check if a Cell has freedoms, if not the move is not valid because this would be suicide
   def checkSuicideBan(row: Int,  col: Int, cell: Cell): Boolean = {
-    //println("Cells:" + checkIfCellHasFreedoms(row, col, cell, Set.empty))
-    checkIfCellHasFreedoms(row, col, cell, Set.empty) match {
-      case None => true //Has freedoms
-      case Some(cells) => cells.isEmpty //if empty -> has freedoms, else set of stones with no freedoms
+    checkForHits(row,col) match {
+      case None => {
+        checkIfCellHasFreedoms(row, col, cell, Set.empty) match {
+          case None => true //Has freedoms
+          case Some(cells) => cells.isEmpty //if empty -> has freedoms, else set of stones with no freedoms
+        }
+      }
+      case Some(c) => true
     }
   }
 
@@ -73,6 +82,12 @@ case class Game(var grid: Grid, var player: (Player, Player)) {
   def rowColIsValid(row: Int, col: Int): Boolean = row >= 0 && row < grid.size && col >= 0 && col < grid.size
 
   def skipTurn(): Game = {
-    copy(grid, player.swap)
+    if (skiped) {
+      println("Game over")
+      copy(grid, player.swap)
+    } else
+    {
+      copy(grid, player.swap,true)
+    }
   }
 }

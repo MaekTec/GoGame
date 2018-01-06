@@ -33,6 +33,18 @@ class Controller(var game:Game) extends Observable{
     notifyObservers
   }
 
+  def toParseInts(c: String):String = {
+    c match {
+      case "b" => "1"
+      case "B" => "1"
+      case "w" => "2"
+      case "W" => "2"
+      case "e" => "0"
+      case "E" => "0"
+      case something => something
+    }
+  }
+
   def intToCell(v: Int): Cell = {
     v match {
       case 0 => Cell(CellStatus.EMPTY)

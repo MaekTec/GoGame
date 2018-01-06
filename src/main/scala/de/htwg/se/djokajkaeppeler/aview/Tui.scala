@@ -30,13 +30,15 @@ class Tui(controller: Controller) extends Observer {
           controller.createEmptyGrid(newSize, player)
         }
         case "s" => controller.skipTurn()
-        case _ => processInputMove(in)
+        case _ => {
+          processInputMove(in)
+        }
       }
     }
   }
 
   def processInputMove(in: Array[String]): Unit = {
-    in.toList.filter(c => c != " ").map(c => c.toInt) match {
+    in.toList.filter(c => c != " ").map(c => controller.toParseInts(c)).map(c => c.toInt) match {
       case row :: column :: Nil => controller.turn(row, column)
       case row :: column :: value :: Nil => controller.set(row, column, value)
       case _ =>
