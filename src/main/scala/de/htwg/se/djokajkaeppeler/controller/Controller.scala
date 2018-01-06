@@ -6,7 +6,7 @@ import de.htwg.se.djokajkaeppeler.util.Observable
 class Controller(var game:Game) extends Observable{
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {
     val grid = new Grid(size)
-    game = Game(grid, (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE))))
+    game = new Game(grid, (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE))))
     notifyObservers
   }
 
