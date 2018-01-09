@@ -41,7 +41,7 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
             true //Has freedoms
           case Some(cells) =>
             println("1")
-            false //if empty -> has freedoms, else set of stones with no freedoms
+            cells.isEmpty //if empty -> has freedoms, else set of stones with no freedoms
         }
       }
       case Some(c) =>
