@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=master)
+
 Go in Scala
 =========================
 
