@@ -50,11 +50,26 @@ class GameSpec extends WordSpec with Matchers {
    }
    "A Turn on a Valid Field " in {
      game = new Game(new Grid(3), (Player("A", Cell(CellStatus.BLACK)), Player("B", Cell(CellStatus.WHITE))))
-     val testGame = game
-     println(game.grid)
-     testGame.grid = game.grid.set(2,2, Cell(CellStatus.BLACK))
-     testGame.playerAtTurn = testGame.player._2
+     val testGame = new Game(new Grid(3), (Player("A", Cell(CellStatus.BLACK)), Player("B", Cell(CellStatus.WHITE))))
+     testGame.grid = testGame.grid.set(2,2, Cell(CellStatus.BLACK))
+     testGame.player = (game.player._2, game.player._1)
      game.turn(2,2) should be(Some(testGame))
+   }
+   "A game Skiped to times in a row shoud be over" in {
+     game.skipTurn() match {
+       case Some(newGame) => {
+         game = newGame
+       }
+       case None =>
+     }
+     game.skipTurn() match {
+       case Some(newGame) => {
+         game = newGame
+       }
+       case None =>
+     }
+
+     game.gameOver should be (true)
    }
 
   }
