@@ -68,9 +68,14 @@ class GameSpec extends WordSpec with Matchers {
        }
        case None =>
      }
-
      game.gameOver should be (true)
    }
+    "Making another Skip" in {
+      game.skipTurn() should be (None)
+    }
+    "Making a other move" in {
+      game.turn(0,0) should be (None)
+    }
 
   }
 }
