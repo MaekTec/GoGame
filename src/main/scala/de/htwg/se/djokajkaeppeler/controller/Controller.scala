@@ -6,7 +6,7 @@ import de.htwg.se.djokajkaeppeler.util.Observable
 class Controller(var game:Game) extends Observable{
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {
     val grid = new Grid(size)
-    game = Game(grid, (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE))))
+    game = new Game(grid, (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE))))
     notifyObservers
   }
 
@@ -31,6 +31,18 @@ class Controller(var game:Game) extends Observable{
   def set(row: Int, col: Int, value: Int):Unit = {
     game.grid = game.grid.set(row, col, intToCell(value))
     notifyObservers
+  }
+
+  def toParseInts(c: String):String = {
+    c match {
+      case "b" => "1"
+      case "B" => "1"
+      case "w" => "2"
+      case "W" => "2"
+      case "e" => "0"
+      case "E" => "0"
+      case something => something
+    }
   }
 
   def intToCell(v: Int): Cell = {
