@@ -8,7 +8,7 @@ import org.scalatest.junit.JUnitRunner
 class GameSpec extends WordSpec with Matchers {
 
   "When a Game is new " should {
-    val game = new Game(new Grid(11), (Player("A", Cell(CellStatus.BLACK)), Player("B", Cell(CellStatus.WHITE))))
+    var game = new Game(new Grid(11), (Player("A", Cell(CellStatus.BLACK)), Player("B", Cell(CellStatus.WHITE))))
     "have Player one to Turn" in {
       game.playerAtTurn should be(Player("A", Cell(CellStatus.BLACK)))
     }
@@ -45,7 +45,17 @@ class GameSpec extends WordSpec with Matchers {
 
      game.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be (true)
    }
-
+   "A Turn on a not Empry Field " in {
+     game.turn(1,1) should be (None)
+   }
+   "A Turn on a Valid Field " in {
+     game = new Game(new Grid(3), (Player("A", Cell(CellStatus.BLACK)), Player("B", Cell(CellStatus.WHITE))))
+     val testGame = game
+     println(game.grid)
+     testGame.grid = game.grid.set(2,2, Cell(CellStatus.BLACK))
+     testGame.playerAtTurn = testGame.player._2
+     game.turn(2,2) should be(Some(testGame))
+   }
 
   }
 }

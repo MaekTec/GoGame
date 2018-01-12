@@ -11,6 +11,7 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
   def this(grid:Grid, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
 
   def turn(row: Int, col: Int): Option[Game] = {
+    //println(this)
     if(gameOver) {
       println("The Game is over please start a new Game")
       return None
@@ -26,9 +27,11 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
         }
         Some(copy(newGame.grid, newGame.player.swap))
       } else {
+        println("2")
         None
       }
     } else {
+      println("1" + rowColIsValid(row, col) + " " +  !grid.cellIsSet(row, col) )
       None
     }
   }
