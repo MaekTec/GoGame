@@ -24,8 +24,13 @@ class Controller(var game:Game) extends Observable{
   }
 
   def skipTurn(): Unit = {
-    game = game.skipTurn()
-    notifyObservers
+    game.skipTurn() match {
+      case Some(newGame) => {
+        game = newGame
+        notifyObservers
+      }
+      case None =>
+    }
   }
 
   def set(row: Int, col: Int, value: Int):Unit = {
