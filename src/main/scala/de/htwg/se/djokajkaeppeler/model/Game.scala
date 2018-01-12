@@ -19,8 +19,7 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
     if (rowColIsValid(row, col) && !grid.cellIsSet(row, col)) {
       var newGame = copy(grid.set(row, col, playerAtTurn.cellstatus), player)
       if (newGame.checkIfMoveIsValid(row, col, playerAtTurn.cellstatus)) {
-        val check = newGame.checkForHits(row, col, playerAtTurn.cellstatus)
-        check match {
+          newGame.checkForHits(row, col, playerAtTurn.cellstatus) match {
           case Some(c) => c.foreach(rc => newGame = copy(newGame.grid.set(rc._1, rc._2, Cell(CellStatus.EMPTY)), player))
           case None =>
         }
