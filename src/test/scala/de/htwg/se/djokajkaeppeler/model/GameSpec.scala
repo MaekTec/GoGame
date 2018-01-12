@@ -43,8 +43,6 @@ class GameSpec extends WordSpec with Matchers {
 
      game.grid = game.grid.set(1,1, Cell(CellStatus.WHITE))
 
-     println(game)
-
      game.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be (true)
    }
 

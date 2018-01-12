@@ -16,7 +16,6 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
       var newGame = copy(grid.set(row, col, playerAtTurn.cellstatus), player)
       if (newGame.checkIfMoveIsValid(row, col, playerAtTurn.cellstatus)) {
         val check = newGame.checkForHits(row, col, playerAtTurn.cellstatus)
-        //println("Remove: " + check)
         check match {
           case Some(c) => c.foreach(rc => newGame = copy(newGame.grid.set(rc._1, rc._2, Cell(CellStatus.EMPTY)), player))
           case None =>
@@ -37,16 +36,12 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
     checkForHits(row,col,cell) match {
       case None => {
         checkIfCellHasFreedoms(row, col, cell, Set.empty) match {
-          case None => println("1,5")
-            true //Has freedoms
+          case None => true //Has freedoms
           case Some(cells) =>
-            println("1")
             cells.isEmpty //if empty -> has freedoms, else set of stones with no freedoms
         }
       }
-      case Some(c) =>
-        println("2")
-        true
+      case Some(c) => true
     }
   }
 
@@ -63,7 +58,6 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
       }
     }
     if (cells.isEmpty) {
-      println("So this happend")
       return None
     }
     Some(cells)
