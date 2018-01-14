@@ -1,6 +1,6 @@
 package de.htwg.se.djokajkaeppeler.model
 
-case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean) {
+case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean, var gameOver: Boolean = false) {
   def this(grid: Grid, player: (Player, Player)){
     this(grid,player,false)
   }
@@ -11,12 +11,15 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
   def this(grid:Grid, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
 
   def turn(row: Int, col: Int): Option[Game] = {
+    if(gameOver) {
+      println("The Game is over please start a new Game")
+      return None
+    }
     skiped = false
     if (rowColIsValid(row, col) && !grid.cellIsSet(row, col)) {
       var newGame = copy(grid.set(row, col, playerAtTurn.cellstatus), player)
       if (newGame.checkIfMoveIsValid(row, col, playerAtTurn.cellstatus)) {
-        val check = newGame.checkForHits(row, col, playerAtTurn.cellstatus)
-        check match {
+          newGame.checkForHits(row, col, playerAtTurn.cellstatus) match {
           case Some(c) => c.foreach(rc => newGame = copy(newGame.grid.set(rc._1, rc._2, Cell(CellStatus.EMPTY)), player))
           case None =>
         }
@@ -86,13 +89,16 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
 
   def rowColIsValid(row: Int, col: Int): Boolean = row >= 0 && row < grid.size && col >= 0 && col < grid.size
 
-  def skipTurn(): Game = {
+  def skipTurn(): Option[Game] = {
+    if(gameOver) {
+      println("The Game is over please start a new Game")
+      return None
+    }
     if (skiped) {
       println("Game over")
-      copy(grid, player.swap)
+      gameOver = true
+      return None
     } else
-    {
-      copy(grid, player.swap,true)
-    }
+      Some(copy(grid, player.swap,true))
   }
 }
