@@ -13,10 +13,11 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
   def turn(row: Int, col: Int): Option[Game] = {
     if(gameOver) {
       println("The Game is over please start a new Game")
+      print(new Evaluation(grid).evaluate())
       return None
     }
     skiped = false
-    if (rowColIsValid(row, col) && !grid.cellIsSet(row, col)) {
+    if (grid.rowColIsValid(row, col) && !grid.cellIsSet(row, col)) {
       var newGame = copy(grid.set(row, col, playerAtTurn.cellstatus), player)
       if (newGame.checkIfMoveIsValid(row, col, playerAtTurn.cellstatus)) {
           newGame.checkForHits(row, col, playerAtTurn.cellstatus) match {
@@ -52,8 +53,8 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
   def checkForHits(row: Int, col: Int,cell: Cell): Option[Set[(Int, Int)]] = {
     var cellStatusReversed = cell.reverse
     var cells: Set[(Int, Int)] = Set.empty
-    for (cell <- getCellsAround(row, col)
-      .filter(rc => rowColIsValid(rc._1, rc._2))
+    for (cell <- grid.getCellsAround(row, col)
+      .filter(rc => grid.rowColIsValid(rc._1, rc._2))
       .filter(rc => grid.cell(rc._1, rc._2) == cellStatusReversed)) {
       checkIfCellHasFreedoms(cell._1, cell._2, cellStatusReversed, Set.empty) match {
         case None => return None
@@ -74,7 +75,7 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
       case CellStatus.EMPTY => None
       case cell.status =>
         var cells: Set[(Int, Int)] = Set((row, col))
-        for (cellA <- getCellsAround(row, col).filter(rc => rowColIsValid(rc._1, rc._2)).filter(rc => !visitedNew.contains(rc._1, rc._2))) {
+        for (cellA <- grid.getCellsAround(row, col).filter(rc => grid.rowColIsValid(rc._1, rc._2)).filter(rc => !visitedNew.contains(rc._1, rc._2))) {
           checkIfCellHasFreedoms(cellA._1, cellA._2, cell, visitedNew) match {
             case None => return None
             case Some(s) => cells ++= s
@@ -85,9 +86,6 @@ case class Game(var grid: Grid, var player: (Player, Player),var skiped: Boolean
     }
   }
 
-  def getCellsAround(row: Int, col: Int): List[(Int, Int)] = (row - 1, col) :: (row, col - 1) :: (row + 1, col) :: (row, col + 1) :: Nil
-
-  def rowColIsValid(row: Int, col: Int): Boolean = row >= 0 && row < grid.size && col >= 0 && col < grid.size
 
   def skipTurn(): Option[Game] = {
     if(gameOver) {
