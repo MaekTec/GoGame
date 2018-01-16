@@ -20,7 +20,7 @@ class GameSpec extends WordSpec with Matchers {
 
       game.grid = game.grid.set(1,1, Cell(CellStatus.WHITE))
 
-      game.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be(false)
+      game.grid.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be(false)
     }
    "When the player try to set wothout freedoms but with a hit" in {
      game.grid = game.grid.set(1,1, Cell(CellStatus.EMPTY))
@@ -43,7 +43,7 @@ class GameSpec extends WordSpec with Matchers {
 
      game.grid = game.grid.set(1,1, Cell(CellStatus.WHITE))
 
-     game.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be (true)
+     game.grid.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be (true)
    }
    "A Turn on a not Empry Field " in {
      game.turn(1,1) should be (None)
