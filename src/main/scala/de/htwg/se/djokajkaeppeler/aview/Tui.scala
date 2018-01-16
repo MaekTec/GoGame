@@ -1,6 +1,7 @@
 package de.htwg.se.djokajkaeppeler.aview
 
-import de.htwg.se.djokajkaeppeler.controller.Controller
+import de.htwg.se.djokajkaeppeler.controller.{Controller, GameStatus}
+import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 import de.htwg.se.djokajkaeppeler.util.Observer
 
 class Tui(controller: Controller) extends Observer {
@@ -29,6 +30,8 @@ class Tui(controller: Controller) extends Observer {
           }
           controller.createEmptyGrid(newSize, player)
         }
+        case "z" => controller.undo
+        case "y" => controller.redo
         case "s" => controller.skipTurn()
         case _ => {
           processInputMove(in)
@@ -47,6 +50,12 @@ class Tui(controller: Controller) extends Observer {
 
   override def update: Unit = {
     println(controller.gridToString)
-    println(controller.playerAtTurnToString + " is at turn")
+    if (controller.gameStatus == NEXT_PLAYER) {
+      println(controller.playerAtTurnToString + GameStatus.message(controller.gameStatus))
+    } else {
+      println(GameStatus.message(controller.gameStatus))
+    }
+
+    controller.gameStatus=IDLE
   }
 }

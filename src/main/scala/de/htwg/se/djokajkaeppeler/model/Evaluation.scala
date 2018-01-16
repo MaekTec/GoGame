@@ -10,7 +10,7 @@ class Evaluation (grid: Grid) {
       for(c <- 0 until grid.size) {
         if (!inTerritories.contains((r, c))) {
           inTerritories += ((r, c))
-          var currentCell = grid.cell(r, c)
+          var currentCell = grid.cellAt(r, c)
           var (territory, edges) = grid.getSetFilled(r, c, currentCell)
           inTerritories ++= territory
           currentCell.status match {

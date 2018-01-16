@@ -18,7 +18,7 @@ class TuiSpec extends WordSpec with Matchers{
     }
     "set a cell to Blak at 0 0" in {
       tui.processInputLine("0 0")
-      controller.game.grid.cell(0,0).status should be(CellStatus.BLACK)
+      controller.game.grid.cellAt(0,0).status should be(CellStatus.BLACK)
     }
     "white skiped turn in Go on input 's'" in {
       var player = controller.game.player._1

@@ -26,26 +26,26 @@ class GridSpec extends WordSpec with Matchers {
       val normalGrid = new Grid(9)
       val awkwardGrid = new Grid(2)
       "give access to its Cells" in {
-        tinygrid.cell(0, 0) should be(new Cell)
-        smallGrid.cell(0, 0) should be(new Cell)
-        smallGrid.cell(0, 1) should be(new Cell)
-        smallGrid.cell(1, 0) should be(new Cell)
-        smallGrid.cell(1, 1) should be(new Cell)
+        tinygrid.cellAt(0, 0) should be(new Cell)
+        smallGrid.cellAt(0, 0) should be(new Cell)
+        smallGrid.cellAt(0, 1) should be(new Cell)
+        smallGrid.cellAt(1, 0) should be(new Cell)
+        smallGrid.cellAt(1, 1) should be(new Cell)
       }
       "allow to set individual Cells and remain immutable" in {
         val changedGrid = smallGrid.set(0, 0, Cell(CellStatus.WHITE))
-        changedGrid.cell(0, 0) should be(Cell(CellStatus.WHITE))
-        smallGrid.cell(0, 0) should be(Cell(CellStatus.EMPTY))
+        changedGrid.cellAt(0, 0) should be(Cell(CellStatus.WHITE))
+        smallGrid.cellAt(0, 0) should be(Cell(CellStatus.EMPTY))
       }
     }
     "prefilled with values CellStatus.WHITE and CellStatus.BLACK alternately" should {
       val tinyGrid = Grid(new Matrix[Cell](Vector(Vector(Cell(CellStatus.WHITE)))))
       val smallGrid = Grid(new Matrix[Cell](Vector(Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)))))
       "have the right values in the right places" in {
-        smallGrid.cell(0, 0) should be(Cell(CellStatus.WHITE))
-        smallGrid.cell(0, 1) should be(Cell(CellStatus.BLACK))
-        smallGrid.cell(1, 0) should be(Cell(CellStatus.WHITE))
-        smallGrid.cell(1, 1) should be(Cell(CellStatus.BLACK))
+        smallGrid.cellAt(0, 0) should be(Cell(CellStatus.WHITE))
+        smallGrid.cellAt(0, 1) should be(Cell(CellStatus.BLACK))
+        smallGrid.cellAt(1, 0) should be(Cell(CellStatus.WHITE))
+        smallGrid.cellAt(1, 1) should be(Cell(CellStatus.BLACK))
       }
     }
     "prefilled with 1 to n on the diagonal" should {
@@ -54,15 +54,15 @@ class GridSpec extends WordSpec with Matchers {
         .set(3, 3, Cell(CellStatus.BLACK)).set(4, 4, Cell(CellStatus.BLACK)).set(5, 5, Cell(CellStatus.BLACK)).set(6, 6, Cell(CellStatus.BLACK)).set(7, 7, Cell(CellStatus.BLACK))
           .set(8, 8, Cell(CellStatus.BLACK))
       "have blocks with the right cells" in {
-        diagonalGrid.cell(0, 0) should be(Cell(CellStatus.BLACK))
-        diagonalGrid.cell(0, 4) should be(Cell(CellStatus.EMPTY))
-        diagonalGrid.cell(0, 8) should be(Cell(CellStatus.EMPTY))
-        diagonalGrid.cell(4, 0) should be(Cell(CellStatus.EMPTY))
-        diagonalGrid.cell(4, 4) should be(Cell(CellStatus.BLACK))
-        diagonalGrid.cell(4, 8) should be(Cell(CellStatus.EMPTY))
-        diagonalGrid.cell(8, 0) should be(Cell(CellStatus.EMPTY))
-        diagonalGrid.cell(8, 4) should be(Cell(CellStatus.EMPTY))
-        diagonalGrid.cell(8, 8) should be(Cell(CellStatus.BLACK))
+        diagonalGrid.cellAt(0, 0) should be(Cell(CellStatus.BLACK))
+        diagonalGrid.cellAt(0, 4) should be(Cell(CellStatus.EMPTY))
+        diagonalGrid.cellAt(0, 8) should be(Cell(CellStatus.EMPTY))
+        diagonalGrid.cellAt(4, 0) should be(Cell(CellStatus.EMPTY))
+        diagonalGrid.cellAt(4, 4) should be(Cell(CellStatus.BLACK))
+        diagonalGrid.cellAt(4, 8) should be(Cell(CellStatus.EMPTY))
+        diagonalGrid.cellAt(8, 0) should be(Cell(CellStatus.EMPTY))
+        diagonalGrid.cellAt(8, 4) should be(Cell(CellStatus.EMPTY))
+        diagonalGrid.cellAt(8, 8) should be(Cell(CellStatus.BLACK))
       }
     }
   }
