@@ -5,20 +5,28 @@ import de.htwg.se.djokajkaeppeler.model._
 import de.htwg.se.djokajkaeppeler.util.{Observable, UndoManager}
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 
-class Controller(var game:Game) extends Observable{
+class Controller(var grid: Grid, var player: (Player, Player)) extends Observable{
 
+  //var evaluationGridRequest: Option[Grid] = None
   var gameStatus: GameStatus = IDLE
-
   private val undoManager = new UndoManager
+
+  def this(grid:Grid, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
+
+  def asGame: (Grid, (Player, Player)) = (grid, player)
+
+  def playerAtTurn : Player = player._1
+  def setNextPlayer : Unit = player = player.swap
 
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {
     val grid = new Grid(size)
-    game = new Game(grid, (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE))))
+    this.grid = grid
+    this.player = (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE)))
     notifyObservers
   }
 
-  def gridToString: String = game.grid.toString
-  def playerAtTurnToString: String = game.playerAtTurn.name
+  def gridToString: String = grid.toString
+  def playerAtTurnToString: String = playerAtTurn.name
 
   def turn(row: Int, col: Int): Unit = {
     undoManager.doStep(new TurnCommand(row, col, this))

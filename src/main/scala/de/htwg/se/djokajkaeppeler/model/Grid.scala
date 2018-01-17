@@ -98,6 +98,64 @@ case class Grid(private val cells:Matrix[Cell]) {
     }
   }
 
+  def evaluate(): Grid = {
+    var territories: Map[Cell, Set[Set[(Int, Int)]]] = Map()
+    var inTerritories: Set[(Int, Int)] = Set()
+
+    for(r <- 0 until size) {
+      for(c <- 0 until size) {
+        if (!inTerritories.contains((r, c))) {
+          inTerritories += ((r, c))
+          var currentCell = cellAt(r, c)
+          var (territory, edges) = getSetFilled(r, c, currentCell)
+          inTerritories ++= territory
+          currentCell.status match {
+            case CellStatus.EMPTY =>
+              if (edges.size == 1) {
+                territories ++= addOrReplaceToMap(territories, territory, edges.toList.head.toTeri)
+              } else {
+                territories ++= addOrReplaceToMap(territories, territory, Cell(CellStatus.EMPTY))
+              }
+            case CellStatus.BLACK =>
+              territories ++= addOrReplaceToMap(territories, territory, Cell(CellStatus.BLACK))
+            case CellStatus.WHITE =>
+              territories ++= addOrReplaceToMap(territories, territory, Cell(CellStatus.WHITE))
+          }
+        }
+      }
+    }
+    mapToGrid(territories)
+  }
+
+  private def mapToGrid(territories: Map[Cell, Set[Set[(Int, Int)]]]): Grid = {
+    var gridNew = new Grid(size)
+    territories.keys.foreach{ t =>
+      territories.get(t).toSeq.flatten.flatten.foreach{ c =>
+        gridNew = gridNew.set(c._1, c._2, t)
+      }
+    }
+    gridNew
+  }
+
+  private def addOrReplaceToMap(territories : Map[Cell, Set[Set[(Int, Int)]]], territory: Set[(Int, Int)], cell: Cell)
+  : Map[Cell, Set[Set[(Int, Int)]]] = {
+    var territoriesNew : Map[Cell, Set[Set[(Int, Int)]]] = Map()
+    territories.get(cell) match {
+      case Some(t) => territoriesNew += (cell -> (t + territory))
+      case None => territoriesNew += (cell -> Set(territory))
+    }
+    territoriesNew
+  }
+
+  def markOrUnmarkDeadGroup(row: Int, col: Int) : Grid = {
+    var (group, _) = getSetFilled(row, col, cellAt(row, col))
+    var gridNew = copy(cells)
+    group.foreach { c =>
+      gridNew = gridNew.set(c._1, c._2, cellAt(row, col).toDeadOrReverse)
+    }
+    gridNew
+  }
+
   override def toString: String = {
     val lineseparator = "|" + "---+" * (size-1) + "---|\n"
     val line = "| x "* size + "|\n"
