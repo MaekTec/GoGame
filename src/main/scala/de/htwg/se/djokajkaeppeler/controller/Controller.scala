@@ -5,7 +5,9 @@ import de.htwg.se.djokajkaeppeler.model._
 import de.htwg.se.djokajkaeppeler.util.{Observable, UndoManager}
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 
-class Controller(var grid: Grid, var player: (Player, Player)) extends Observable{
+import scala.swing.Publisher
+
+class Controller(var grid: Grid, var player: (Player, Player)) extends Publisher{
 
   //var evaluationGridRequest: Option[Grid] = None
   var gameStatus: GameStatus = IDLE
@@ -22,7 +24,7 @@ class Controller(var grid: Grid, var player: (Player, Player)) extends Observabl
     val grid = new Grid(size)
     this.grid = grid
     this.player = (Player(player._1, Cell(CellStatus.BLACK)), Player(player._2, Cell(CellStatus.WHITE)))
-    notifyObservers
+    publish(new Played)
   }
 
   def gridToString: String = grid.toString
@@ -30,27 +32,27 @@ class Controller(var grid: Grid, var player: (Player, Player)) extends Observabl
 
   def turn(row: Int, col: Int): Unit = {
     undoManager.doStep(new TurnCommand(row, col, this))
-    notifyObservers
+    publish(new Played)
   }
 
   def skipTurn(): Unit = {
     undoManager.doStep(new SkipCommand(this))
-    notifyObservers
+    publish(new Played)
   }
 
   def set(row: Int, col: Int, value: Int):Unit = {
     undoManager.doStep(new SetCommand(row, col, value, this))
-    notifyObservers
+    publish(new Played)
   }
 
   def undo: Unit = {
     undoManager.undoStep
-    notifyObservers
+    publish(new Played)
   }
 
   def redo: Unit = {
     undoManager.redoStep
-    notifyObservers
+    publish(new Played)
   }
 
   def toParseInts(c: String):String = {
