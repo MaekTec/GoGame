@@ -53,9 +53,10 @@ class Tui(controller: Controller) extends Observer {
     if (controller.gameStatus == NEXT_PLAYER) {
       println(controller.playerAtTurnToString + GameStatus.message(controller.gameStatus))
     } else {
+      println(controller.playerAtTurnToString)
       println(GameStatus.message(controller.gameStatus))
     }
 
-    controller.gameStatus=IDLE
+    //controller.gameStatus=IDLE
   }
 }
