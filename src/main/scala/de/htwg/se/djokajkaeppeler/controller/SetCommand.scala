@@ -5,11 +5,11 @@ import de.htwg.se.djokajkaeppeler.util.Command
 
 
 class SetCommand(row:Int, col: Int, value:Int, controller: Controller) extends Command {
-  override def doStep: Unit =   controller.game.grid = controller.game.grid.set(row, col, intToCell(value))
+  override def doStep: Unit =   controller.grid = controller.grid.set(row, col, intToCell(value))
 
-  override def undoStep: Unit = controller.game.grid = controller.game.grid.set(row, col, Cell(CellStatus.EMPTY))
+  override def undoStep: Unit = controller.grid = controller.grid.set(row, col, Cell(CellStatus.EMPTY))
 
-  override def redoStep: Unit = controller.game.grid = controller.game.grid.set(row, col, intToCell(value))
+  override def redoStep: Unit = controller.grid = controller.grid.set(row, col, intToCell(value))
 
   def intToCell(v: Int): Cell = {
     v match {
