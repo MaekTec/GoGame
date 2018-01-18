@@ -24,6 +24,9 @@ class SkipCommand (controller: Controller) extends Command{
         controller.gameStatus = PLAYOUT_OR_GAME_OVER
       }
       case PLAYOUT_OR_GAME_OVER => {
+        val (newGrid, pB, pW) = controller.grid.countPoints
+        controller.grid = newGrid
+        println("White: " + pW + " Black: " + pB)
         controller.gameStatus = GAME_OVER
       }
       case _ => {

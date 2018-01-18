@@ -4,6 +4,7 @@ case class Cell(status: CellStatus.Value) {
   def this() = this(CellStatus.EMPTY)
 
   def isSet: Boolean = status != CellStatus.EMPTY
+  def istDead: Boolean = status != CellStatus.WHITE_MARKED_DEAD || status != CellStatus.BLACK_MARKED_DEAD
 
   def reverse: Cell = status match {
     case CellStatus.EMPTY => Cell(status)
