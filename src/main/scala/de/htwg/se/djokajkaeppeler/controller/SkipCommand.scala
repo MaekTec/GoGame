@@ -21,6 +21,9 @@ class SkipCommand (controller: Controller) extends Command{
         controller.gameStatus = IN_EVALUATION_CONFIRM_OR_MARK
       }
       case IN_EVALUATION_CONFIRM_OR_MARK => {
+        controller.gameStatus = PLAYOUT_OR_GAME_OVER
+      }
+      case PLAYOUT_OR_GAME_OVER => {
         controller.gameStatus = GAME_OVER
       }
       case _ => {

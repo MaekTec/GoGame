@@ -18,11 +18,25 @@ case class Cell(status: CellStatus.Value) {
   def toTeri: Cell = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_TERI)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_TERI)
+    case _ => Cell(status)
+  }
+
+  def toTeriReverse: Cell = status match {
+    case CellStatus.WHITE_TERI => Cell(CellStatus.WHITE)
+    case CellStatus.BLACK_TERI => Cell(CellStatus.BLACK)
+    case _ => Cell(status)
   }
 
   def toDead: Cell = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_MARKED_DEAD)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_MARKED_DEAD)
+    case _ => Cell(status)
+  }
+
+  def toAlive: Cell = status match {
+    case CellStatus.WHITE_MARKED_DEAD => Cell(CellStatus.WHITE)
+    case CellStatus.BLACK_MARKED_DEAD => Cell(CellStatus.BLACK)
+    case _ => Cell(status)
   }
 
   def toDeadOrReverse: Cell = status match {
@@ -30,7 +44,10 @@ case class Cell(status: CellStatus.Value) {
     case CellStatus.BLACK => Cell(CellStatus.BLACK_MARKED_DEAD)
     case CellStatus.WHITE_MARKED_DEAD => Cell(CellStatus.WHITE)
     case CellStatus.BLACK_MARKED_DEAD => Cell(CellStatus.BLACK)
+    case _ => Cell(status)
   }
+
+  def toAliveAndTerReverse: Cell = toAlive.toTeriReverse
 
   override def toString: String = {
     this match {

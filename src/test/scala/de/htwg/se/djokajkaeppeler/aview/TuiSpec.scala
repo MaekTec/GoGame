@@ -14,7 +14,7 @@ class TuiSpec extends WordSpec with Matchers{
     val tui = new Tui(controller)
     "create and empty Sudoku on input 'n'" in {
       tui.processInputLine("n")
-      controller.asGame should be(new Grid(11), "Player 1", "Player 2")
+      controller.asGame should be(new Grid(11), ("Player 1", "Player 2"))
     }
     "set a cell to Blak at 0 0" in {
       tui.processInputLine("0 0")

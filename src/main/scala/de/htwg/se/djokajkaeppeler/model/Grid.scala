@@ -156,6 +156,16 @@ case class Grid(private val cells:Matrix[Cell]) {
     gridNew
   }
 
+  def allDeathCellsToAliveAndTeriReverse() : Grid = {
+    var gridNew = copy(cells)
+    for(r <- 0 until size) {
+      for(c <- 0 until size) {
+            gridNew = gridNew.set(r, c, cellAt(r, c).toAliveAndTerReverse)
+      }
+    }
+    gridNew
+  }
+
   override def toString: String = {
     val lineseparator = "|" + "---+" * (size-1) + "---|\n"
     val line = "| x "* size + "|\n"
