@@ -47,7 +47,7 @@ class CellSpec extends WordSpec with Matchers{
     "can be alive" should {
       val aliveCell = Cell(CellStatus.WHITE)
       "is dead" in {
-        aliveCell.isAlive should be(false)
+        aliveCell.isAlive should be(true)
       }
     }
     ",every cell ," should {
