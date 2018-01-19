@@ -17,17 +17,27 @@ class SwingGui(controller: Controller) extends Frame {
 
   //contents = new Button("skip!")
 
+
+  val skipButton = new Button("skip!")
   val panel = new FlowPanel{
 
-    val button = new Button("skip!")
+
 
     //resizable = false
 
     resizable = true
-    contents += button
-    listenTo(button)
+    contents += skipButton
 
   }
+
+  listenTo(skipButton)
+  reactions += {
+    case ButtonClicked(button) =>
+      if(button == skipButton) {
+        controller.skipTurn()
+      }
+  }
+
 
 
   contents = new BorderPanel {
