@@ -1,4 +1,11 @@
-[![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=master)
+[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=master) - Main
+  
+[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-maektec)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-maektec) - Markus
+  
+[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-flobolo)](https://travis-ci.org/MaekTec/GoGame) -   [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-flobolo) - Florian
+  
+
+
 
 Go in Scala
 =========================
