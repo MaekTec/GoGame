@@ -13,7 +13,7 @@ class SkipCommand (controller: Controller) extends Command{
       case GAME_OVER =>
       case SKIPPED => {
         //val eval = Evaluation(controller.grid)
-        controller.grid = controller.grid.evaluate()
+        controller.grid = controller.gridEvaluationStrategy.evaluate(controller.grid)
         controller.gameStatus = IN_EVALUATION_MARK
       }
       case IN_EVALUATION_MARK => {
@@ -24,7 +24,7 @@ class SkipCommand (controller: Controller) extends Command{
         controller.gameStatus = PLAYOUT_OR_GAME_OVER
       }
       case PLAYOUT_OR_GAME_OVER => {
-        val (newGrid, pB, pW) = controller.grid.countPoints
+        val (newGrid, pB, pW) = controller.gridEvaluationStrategy.countPoints(controller.grid)
         controller.grid = newGrid
         println("White: " + pW + " Black: " + pB)
         controller.gameStatus = GAME_OVER

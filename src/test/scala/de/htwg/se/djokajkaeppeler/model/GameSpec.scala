@@ -46,7 +46,7 @@ class GameSpec extends WordSpec with Matchers {
 
      game.grid.checkIfMoveIsValid(1,1,Cell(CellStatus.WHITE)) should be (true)
    }
-   "A Turn on a not Empry Field " in {
+   /*"A Turn on a not Empry Field " in {
      game.turn(1,1) should be (None)
    }
    "A Turn on a Valid Field " in {
@@ -76,7 +76,7 @@ class GameSpec extends WordSpec with Matchers {
     }
     "Making a other move" in {
       game.turn(0,0) should be (None)
-    }
+    }*/
 
   }
 }

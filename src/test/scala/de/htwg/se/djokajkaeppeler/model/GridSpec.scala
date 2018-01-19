@@ -65,5 +65,11 @@ class GridSpec extends WordSpec with Matchers {
         diagonalGrid.cellAt(8, 8) should be(Cell(CellStatus.BLACK))
       }
     }
+    /*"prefilled at 1,1" should {
+      var normalGrid = new Grid(9).set(1, 1, Cell(CellStatus.WHITE))
+      "asdf" in {
+        normalGrid.checkIfMoveIsValid(1, 1, Cell(CellStatus.BLACK)) should be(false)
+      }
+    }*/
   }
 }
