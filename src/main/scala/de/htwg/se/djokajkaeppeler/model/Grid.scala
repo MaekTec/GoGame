@@ -98,55 +98,6 @@ case class Grid(private val cells:Matrix[Cell]) {
     }
   }
 
-  def evaluate(): Grid = {
-    var territories: Map[Cell, Set[Set[(Int, Int)]]] = Map()
-    var inTerritories: Set[(Int, Int)] = Set()
-
-    for(r <- 0 until size) {
-      for(c <- 0 until size) {
-        if (!inTerritories.contains((r, c))) {
-          inTerritories += ((r, c))
-          var currentCell = cellAt(r, c)
-          var (territory, edges) = getSetFilled(r, c, currentCell)
-          inTerritories ++= territory
-          currentCell.status match {
-            case CellStatus.EMPTY | CellStatus.WHITE_TERI | CellStatus.BLACK_TERI =>
-              if (edges.size == 1) {
-                territories ++= addOrReplaceToMap(territories, territory, edges.toList.head.toTeri)
-              } else {
-                territories ++= addOrReplaceToMap(territories, territory, Cell(CellStatus.EMPTY))
-              }
-            case CellStatus.BLACK =>
-              territories ++= addOrReplaceToMap(territories, territory, Cell(CellStatus.BLACK))
-            case CellStatus.WHITE =>
-              territories ++= addOrReplaceToMap(territories, territory, Cell(CellStatus.WHITE))
-          }
-        }
-      }
-    }
-    mapToGrid(territories)
-  }
-
-  private def mapToGrid(territories: Map[Cell, Set[Set[(Int, Int)]]]): Grid = {
-    var gridNew = new Grid(size)
-    territories.keys.foreach{ t =>
-      territories.get(t).toSeq.flatten.flatten.foreach{ c =>
-        gridNew = gridNew.set(c._1, c._2, t)
-      }
-    }
-    gridNew
-  }
-
-  private def addOrReplaceToMap(territories : Map[Cell, Set[Set[(Int, Int)]]], territory: Set[(Int, Int)], cell: Cell)
-  : Map[Cell, Set[Set[(Int, Int)]]] = {
-    var territoriesNew : Map[Cell, Set[Set[(Int, Int)]]] = Map()
-    territories.get(cell) match {
-      case Some(t) => territoriesNew += (cell -> (t + territory))
-      case None => territoriesNew += (cell -> Set(territory))
-    }
-    territoriesNew
-  }
-
   def markOrUnmarkDeadGroup(row: Int, col: Int) : Grid = {
     var (group, _) = getSetFilled(row, col, cellAt(row, col))
     var gridNew = this
@@ -172,21 +123,6 @@ case class Grid(private val cells:Matrix[Cell]) {
       col <- 0 until size
     } gridNew = gridNew.set(row, col, cellAt(row, col).toAliveAndTerReverse)
     gridNew
-  }
-
-  def countPoints(): (Grid, Int, Int) = {
-    val gridToCount = removeAllDeadCells().evaluate()
-    var whitePoints = 0
-    var blackPoints = 0
-    for {
-      row <- 0 until size
-      col <- 0 until size
-    } gridToCount.cellAt(row, col).status match {
-      case CellStatus.BLACK | CellStatus.BLACK_TERI => blackPoints += 1
-      case CellStatus.WHITE | CellStatus.WHITE_TERI => whitePoints += 1
-      case _ =>
-    }
-    (gridToCount, blackPoints, whitePoints)
   }
 
   def removeAllDeadCells() : Grid = {
