@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=dev)](https://coveralls.io/github/MaekTec/GoGame?branch=master) - Dev
   
-[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-maektec)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-maektec) - Markus
+[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-maektec)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=dev-maektec)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-maektec) - Markus
   
-[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-flobolo)](https://travis-ci.org/MaekTec/GoGame) -   [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-flobolo) - Florian
+[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-flobolo)](https://travis-ci.org/MaekTec/GoGame) -   [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=dev-flobolo)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-flobolo) - Florian
   
 
 
