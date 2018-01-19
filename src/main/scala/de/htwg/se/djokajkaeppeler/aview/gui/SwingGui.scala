@@ -6,6 +6,7 @@ import scala.swing.event._
 import de.htwg.se.djokajkaeppeler.controller._
 import scala.io.Source._
 
+
 class CellClicked(val row: Int, val column: Int) extends Event
 
 class SwingGui(controller: Controller) extends Frame {
@@ -14,13 +15,26 @@ class SwingGui(controller: Controller) extends Frame {
 
   title = "HTWG Go"
 
+  //contents = new Button("skip!")
 
-  def top = new MainFrame {
-    title = "Hello, World!"
-    contents = new Button {
-      text = "Click Me!"
-    }
+  val panel = new FlowPanel{
+
+    val button = new Button("skip!")
+
+    //resizable = false
+
+    resizable = true
+    contents += button
+    listenTo(button)
+
   }
+
+
+  contents = new BorderPanel {
+    add(panel, BorderPanel.Position.North)
+
+  }
+
 
   visible = true
 }
