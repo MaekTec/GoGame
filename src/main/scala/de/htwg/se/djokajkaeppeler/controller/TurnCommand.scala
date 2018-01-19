@@ -15,6 +15,9 @@ class TurnCommand(row: Int, col: Int, controller: Controller) extends Command{
       }
       case GAME_OVER =>
       case _ => {
+        if (controller.gameStatus == PLAYOUT_OR_GAME_OVER) {
+          controller.grid = controller.grid.allDeathCellsToAliveAndTeriReverse()
+        }
         if (controller.grid.rowColIsValid(row, col) && !controller.grid.cellIsSet(row, col)) {
           var newGrid = controller.grid.set(row, col, controller.playerAtTurn.cellstatus)
           if (newGrid.checkIfMoveIsValid(row, col, controller.playerAtTurn.cellstatus)) {

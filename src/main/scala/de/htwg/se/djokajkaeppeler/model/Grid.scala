@@ -110,7 +110,7 @@ case class Grid(private val cells:Matrix[Cell]) {
           var (territory, edges) = getSetFilled(r, c, currentCell)
           inTerritories ++= territory
           currentCell.status match {
-            case CellStatus.EMPTY =>
+            case CellStatus.EMPTY | CellStatus.WHITE_TERI | CellStatus.BLACK_TERI =>
               if (edges.size == 1) {
                 territories ++= addOrReplaceToMap(territories, territory, edges.toList.head.toTeri)
               } else {
@@ -149,10 +149,52 @@ case class Grid(private val cells:Matrix[Cell]) {
 
   def markOrUnmarkDeadGroup(row: Int, col: Int) : Grid = {
     var (group, _) = getSetFilled(row, col, cellAt(row, col))
-    var gridNew = copy(cells)
+    var gridNew = this
     group.foreach { c =>
       gridNew = gridNew.set(c._1, c._2, cellAt(row, col).toDeadOrReverse)
     }
+    gridNew
+  }
+
+  /*def changeAllCells(f: Cell => Cell): Grid = {
+    var gridNew = this
+    for {
+      row <- 0 until size
+      col <- 0 until size;
+    } gridNew = gridNew.set(row, col, f(cellAt(row, col)))
+    gridNew
+  }*/
+
+  def allDeathCellsToAliveAndTeriReverse() : Grid = {
+    var gridNew = this
+    for {
+      row <- 0 until size
+      col <- 0 until size
+    } gridNew = gridNew.set(row, col, cellAt(row, col).toAliveAndTerReverse)
+    gridNew
+  }
+
+  def countPoints(): (Grid, Int, Int) = {
+    val gridToCount = removeAllDeadCells().evaluate()
+    var whitePoints = 0
+    var blackPoints = 0
+    for {
+      row <- 0 until size
+      col <- 0 until size
+    } gridToCount.cellAt(row, col).status match {
+      case CellStatus.BLACK | CellStatus.BLACK_TERI => blackPoints += 1
+      case CellStatus.WHITE | CellStatus.WHITE_TERI => whitePoints += 1
+      case _ =>
+    }
+    (gridToCount, blackPoints, whitePoints)
+  }
+
+  def removeAllDeadCells() : Grid = {
+    var gridNew = this
+    for {
+      row <- 0 until size
+      col <- 0 until size
+    } gridNew = gridNew.set(row, col, cellAt(row, col).toAlive)
     gridNew
   }
 
