@@ -16,6 +16,18 @@ class CellSpec extends WordSpec with Matchers{
       "not be set" in {
         emptyCell.isSet should be(false)
       }
+      "and can't be converted to a territory and reverse" in {
+        emptyCell.toTeri should be(Cell(CellStatus.EMPTY))
+        emptyCell.toTeriReverse should be(Cell(CellStatus.EMPTY))
+      }
+      "and can't be converted to alive and reverse" in {
+        emptyCell.toAlive should be(Cell(CellStatus.EMPTY))
+        emptyCell.toAliveAndTerReverse should be(Cell(CellStatus.EMPTY))
+      }
+      "and can't be converted to dead and reverse" in {
+        emptyCell.toDead should be(Cell(CellStatus.EMPTY))
+        emptyCell.toDeadOrReverse should be(Cell(CellStatus.EMPTY))
+      }
     }
     "set to black value" should {
       val blackCell = Cell(CellStatus.BLACK)
@@ -24,6 +36,36 @@ class CellSpec extends WordSpec with Matchers{
       }
       "be set" in {
         blackCell.isSet should be(true)
+      }
+    }
+    "can be marked dead" should {
+      val deadCell = Cell(CellStatus.BLACK_MARKED_DEAD)
+      "is dead" in {
+        deadCell.isDead should be(true)
+      }
+    }
+    "can be alive" should {
+      val aliveCell = Cell(CellStatus.WHITE)
+      "is dead" in {
+        aliveCell.isAlive should be(false)
+      }
+    }
+    ",every cell ," should {
+      val emptyCell = Cell(CellStatus.EMPTY)
+      val whiteCell = Cell(CellStatus.WHITE)
+      val blackCell = Cell(CellStatus.BLACK)
+      val whiteTeriCell = Cell(CellStatus.WHITE_TERI)
+      val blackTeriCell = Cell(CellStatus.BLACK_TERI)
+      val whiteMarkedDeadCell = Cell(CellStatus.WHITE_MARKED_DEAD)
+      val blackMarkedDeadCell = Cell(CellStatus.BLACK_MARKED_DEAD)
+      "has a reverse" in {
+        emptyCell.reverse should be(Cell(CellStatus.EMPTY))
+        whiteCell.reverse should be(Cell(CellStatus.BLACK))
+        blackCell.reverse should be(Cell(CellStatus.WHITE))
+        whiteTeriCell.reverse should be(Cell(CellStatus.BLACK_TERI))
+        blackTeriCell.reverse should be(Cell(CellStatus.WHITE_TERI))
+        whiteMarkedDeadCell.reverse should be(Cell(CellStatus.BLACK_MARKED_DEAD))
+        blackMarkedDeadCell.reverse should be(Cell(CellStatus.WHITE_MARKED_DEAD))
       }
     }
   }

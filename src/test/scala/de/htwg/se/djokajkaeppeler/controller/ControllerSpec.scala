@@ -12,6 +12,8 @@ class ControllerSpec extends WordSpec with Matchers{
       val smallGrid = new Grid(4)
       val controller = new Controller(smallGrid, "Player 1", "Player 2")
       controller.createEmptyGrid(3, ("Player 3", "Player 4"))
+      val player1 = Player("Player 3", Cell(CellStatus.BLACK))
+      val player2 = Player("Player 4", Cell(CellStatus.WHITE))
       "has empty Cells" in {
         controller.grid.cellAt(0, 0).isSet should be(false)
         controller.grid.cellAt(0, 1).isSet should be(false)
@@ -21,6 +23,34 @@ class ControllerSpec extends WordSpec with Matchers{
       "as a game" in {
         controller.asGame should be (new Grid(3), (Player("Player 3", Cell(CellStatus.BLACK)),
           Player("Player 4", Cell(CellStatus.WHITE))))
+      }
+      "handle undo/redo of a turn" in {
+        controller.grid.cellAt(0, 0).isSet should be(false)
+        controller.turn(0, 0)
+        controller.grid.cellAt(0, 0).isSet should be(true)
+        controller.undo
+        controller.grid.cellAt(0, 0).isSet should be(false)
+        controller.redo
+        controller.grid.cellAt(0, 0).isSet should be(true)
+        controller.undo
+      }
+      "handle undo/redo of a set" in {
+        controller.grid.cellAt(1, 1) should be(Cell(CellStatus.EMPTY))
+        controller.set(1, 1, 1)
+        controller.grid.cellAt(1, 1) should be(Cell(CellStatus.BLACK))
+        controller.undo
+        controller.grid.cellAt(1, 1) should be(Cell(CellStatus.EMPTY))
+        controller.redo
+        controller.grid.cellAt(1, 1)should be(Cell(CellStatus.BLACK))
+      }
+      "handle undo/redo of a skip" in {
+        controller.playerAtTurn should be(player1)
+        controller.skipTurn
+        controller.playerAtTurn should be(player2)
+        controller.undo
+        controller.playerAtTurn should be(player1)
+        controller.redo
+        controller.playerAtTurn should be(player2)
       }
     }
     "when a player does a turn at the begin of a game" should {
@@ -67,9 +97,13 @@ class ControllerSpec extends WordSpec with Matchers{
       val controller = new Controller(smallGrid, "Player 1", "Player 2")
       controller.turn(1, 1)
       controller.set(1, 1, 2)
-      "the cell is set" in {
+      controller.set(0, 0, 2)
+      controller.set(0, 0, 0)
+      "with WHITE the cell is set" in {
         controller.grid.cellAt(1, 1) should be(Cell(CellStatus.WHITE))
+        controller.grid.cellAt(0, 0) should be(Cell(CellStatus.EMPTY))
       }
+
     }
   }
 }
