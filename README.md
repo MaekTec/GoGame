@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=master) - Main
+[![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=dev)](https://coveralls.io/github/MaekTec/GoGame?branch=master) - Dev
   
 [![Build Status](https://travis-ci.org/MaekTec/GoGame.svg?branch=dev-maektec)](https://travis-ci.org/MaekTec/GoGame) - [![Coverage Status](https://coveralls.io/repos/github/MaekTec/GoGame/badge.svg?branch=master)](https://coveralls.io/github/MaekTec/GoGame?branch=dev-maektec) - Markus
   
