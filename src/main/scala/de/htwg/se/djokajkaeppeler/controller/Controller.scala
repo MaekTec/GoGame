@@ -4,19 +4,22 @@ import de.htwg.se.djokajkaeppeler.controller.GameStatus.GameStatus
 import de.htwg.se.djokajkaeppeler.model._
 import de.htwg.se.djokajkaeppeler.util.{Observable, UndoManager}
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
+import de.htwg.se.djokajkaeppeler.model.gridComponent.GridInterface
+import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus, Grid, GridEvaluationChineseStrategy}
+import de.htwg.se.djokajkaeppeler.model.playerComponent.Player
 
 import scala.swing.Publisher
 
-class Controller(var grid: Grid, var player: (Player, Player)) extends Publisher{
+class Controller(var grid: GridInterface, var player: (Player, Player)) extends Publisher{
 
   //var evaluationGridRequest: Option[Grid] = None
   var gameStatus: GameStatus = IDLE
   private val undoManager = new UndoManager
   var gridEvaluationStrategy = new GridEvaluationChineseStrategy
 
-  def this(grid:Grid, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
+  def this(grid:GridInterface, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
 
-  def asGame: (Grid, (Player, Player)) = (grid, player)
+  def asGame: (GridInterface, (Player, Player)) = (grid, player)
 
   def playerAtTurn : Player = player._1
   def setNextPlayer : Unit = player = player.swap

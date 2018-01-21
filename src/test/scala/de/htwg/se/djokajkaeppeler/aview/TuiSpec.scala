@@ -1,7 +1,9 @@
 package de.htwg.se.djokajkaeppeler.aview
 
 import de.htwg.se.djokajkaeppeler.controller.Controller
-import de.htwg.se.djokajkaeppeler.model.{Cell, CellStatus, Grid, Player}
+import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus, Grid}
+import de.htwg.se.djokajkaeppeler.model.playerComponent.Player
+import de.htwg.se.djokajkaeppeler.model.{CellStatus, Grid}
 import org.junit.runner.RunWith
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.junit.JUnitRunner

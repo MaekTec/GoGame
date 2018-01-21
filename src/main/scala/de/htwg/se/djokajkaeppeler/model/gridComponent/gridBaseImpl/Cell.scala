@@ -1,13 +1,15 @@
-package de.htwg.se.djokajkaeppeler.model
+package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
-case class Cell(status: CellStatus.Value) {
+import de.htwg.se.djokajkaeppeler.model.gridComponent.CellInterface
+
+case class Cell(status: CellStatus.Value) extends CellInterface{
   def this() = this(CellStatus.EMPTY)
 
   def isSet: Boolean = status != CellStatus.EMPTY
   def isDead: Boolean = status == CellStatus.WHITE_MARKED_DEAD || status == CellStatus.BLACK_MARKED_DEAD
   def isAlive: Boolean = !isDead
 
-  def reverse: Cell = status match {
+  def reverse: CellInterface = status match {
     case CellStatus.EMPTY => Cell(status)
     case CellStatus.WHITE => Cell(CellStatus.BLACK)
     case CellStatus.BLACK => Cell(CellStatus.WHITE)
@@ -17,31 +19,31 @@ case class Cell(status: CellStatus.Value) {
     case CellStatus.BLACK_MARKED_DEAD => Cell(CellStatus.WHITE_MARKED_DEAD)
   }
 
-  def toTeri: Cell = status match {
+  def toTeri: CellInterface = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_TERI)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_TERI)
     case _ => Cell(status)
   }
 
-  def toTeriReverse: Cell = status match {
+  def toTeriReverse: CellInterface = status match {
     case CellStatus.WHITE_TERI => Cell(CellStatus.WHITE)
     case CellStatus.BLACK_TERI => Cell(CellStatus.BLACK)
     case _ => Cell(status)
   }
 
-  def toDead: Cell = status match {
+  def toDead: CellInterface = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_MARKED_DEAD)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_MARKED_DEAD)
     case _ => Cell(status)
   }
 
-  def toAlive: Cell = status match {
+  def toAlive: CellInterface = status match {
     case CellStatus.WHITE_MARKED_DEAD => Cell(CellStatus.WHITE)
     case CellStatus.BLACK_MARKED_DEAD => Cell(CellStatus.BLACK)
     case _ => Cell(status)
   }
 
-  def toDeadOrReverse: Cell = status match {
+  def toDeadOrReverse: CellInterface = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_MARKED_DEAD)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_MARKED_DEAD)
     case CellStatus.WHITE_MARKED_DEAD => Cell(CellStatus.WHITE)
@@ -49,7 +51,7 @@ case class Cell(status: CellStatus.Value) {
     case _ => Cell(status)
   }
 
-  def toAliveAndTerReverse: Cell = toAlive.toTeriReverse
+  def toAliveAndTerReverse: CellInterface = toAlive.toTeriReverse
 
   override def toString: String = {
     this match {

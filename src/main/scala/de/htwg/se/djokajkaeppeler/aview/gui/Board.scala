@@ -2,13 +2,13 @@ package de.htwg.se.djokajkaeppeler.aview.gui
 
 import java.awt.geom.{Ellipse2D, Line2D}
 
-import de.htwg.se.djokajkaeppeler.model.{CellStatus, Grid}
 import de.htwg.se.djokajkaeppeler.controller._
 
 import scala.swing._
 import scala.swing.{Component, Dimension}
 import java.awt.{BasicStroke, Color, Graphics2D, Toolkit}
 
+import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.CellStatus
 import de.htwg.se.go.aview.gui.SwingGui
 
 

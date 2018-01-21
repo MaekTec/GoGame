@@ -1,11 +1,12 @@
 package de.htwg.se.djokajkaeppeler.controller
 
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
-import de.htwg.se.djokajkaeppeler.model.{Evaluation, Grid, Player}
+import de.htwg.se.djokajkaeppeler.model.gridComponent.GridInterface
+import de.htwg.se.djokajkaeppeler.model.playerComponent.Player
 import de.htwg.se.djokajkaeppeler.util.Command
 
 class SkipCommand (controller: Controller) extends Command{
-  var memento: (Grid, (Player, Player)) = (controller.grid, controller.player)
+  var memento: (GridInterface, (Player, Player)) = (controller.grid, controller.player)
   override def doStep: Unit =   {
     memento = (controller.grid, controller.player)
 

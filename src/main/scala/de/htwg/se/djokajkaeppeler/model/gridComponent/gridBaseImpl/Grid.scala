@@ -1,15 +1,16 @@
-package de.htwg.se.djokajkaeppeler.model
+package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
-import scala.math.sqrt
+import de.htwg.se.djokajkaeppeler.model.gridComponent.GridInterface
+
 import scala.collection.mutable.Stack
 
-case class Grid(private val cells:Matrix[Cell]) {
+case class Grid(private val cells:Matrix[Cell]) extends GridInterface{
   def this(size:Int) = this(new Matrix[Cell](size, Cell(CellStatus.EMPTY)))
 
-  val size:Int = cells.size
+  def size:Int = cells.size
 
   def cellAt(row:Int, col:Int):Cell = cells.cell(row, col)
-  def set(row:Int, col:Int, value:Cell):Grid = copy(cells.replaceCell(row, col, value))
+  def set(row:Int, col:Int, value:Cell):GridInterface = copy(cells.replaceCell(row, col, value))
   def cellIsSet(row:Int, col:Int):Boolean = cells.cell(row, col).isSet
 
   /*
@@ -98,7 +99,7 @@ case class Grid(private val cells:Matrix[Cell]) {
     }
   }
 
-  def markOrUnmarkDeadGroup(row: Int, col: Int) : Grid = {
+  def markOrUnmarkDeadGroup(row: Int, col: Int) : GridInterface = {
     var (group, _) = getSetFilled(row, col, cellAt(row, col))
     var gridNew = this
     group.foreach { c =>
@@ -116,8 +117,8 @@ case class Grid(private val cells:Matrix[Cell]) {
     gridNew
   }*/
 
-  def allDeathCellsToAliveAndTeriReverse() : Grid = {
-    var gridNew = this
+  def allDeathCellsToAliveAndTeriReverse() : GridInterface = {
+    var gridNew = this.asInstanceOf[GridInterface]
     for {
       row <- 0 until size
       col <- 0 until size
@@ -125,8 +126,8 @@ case class Grid(private val cells:Matrix[Cell]) {
     gridNew
   }
 
-  def removeAllDeadCells() : Grid = {
-    var gridNew = this
+  def removeAllDeadCells() : GridInterface = {
+    var gridNew = this.asInstanceOf[GridInterface]
     for {
       row <- 0 until size
       col <- 0 until size
