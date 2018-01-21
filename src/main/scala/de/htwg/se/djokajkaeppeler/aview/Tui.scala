@@ -2,11 +2,14 @@ package de.htwg.se.djokajkaeppeler.aview
 
 import de.htwg.se.djokajkaeppeler.controller.{Controller, GameStatus}
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
-import de.htwg.se.djokajkaeppeler.util.Observer
+import de.htwg.se.djokajkaeppeler.controller._
 
-class Tui(controller: Controller) extends Observer {
+import scala.swing.Reactor
 
-  controller.add(this)
+class Tui(controller: Controller) extends Reactor {
+
+  listenTo(controller)
+
   val size = 11
   var players: (String, String) = ("Player 1", "Player 2")
 
@@ -48,7 +51,15 @@ class Tui(controller: Controller) extends Observer {
     }
   }
 
-  override def update: Unit = {
+  reactions += {
+    case event: GridSizeChanged => printGameTui
+    case event: Played     => printGameTui
+  }
+
+
+
+
+    def printGameTui: Unit = {
     println(controller.gridToString)
     if (controller.gameStatus == NEXT_PLAYER) {
       println(controller.playerAtTurnToString + GameStatus.message(controller.gameStatus))
