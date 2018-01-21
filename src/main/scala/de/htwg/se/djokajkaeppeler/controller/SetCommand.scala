@@ -16,7 +16,6 @@ class SetCommand(row:Int, col: Int, value:Int, controller: Controller) extends C
       case 0 => Cell(CellStatus.EMPTY)
       case 1 => Cell(CellStatus.BLACK)
       case 2 => Cell(CellStatus.WHITE)
-      case _ => Cell(CellStatus.EMPTY)
     }
   }
 }

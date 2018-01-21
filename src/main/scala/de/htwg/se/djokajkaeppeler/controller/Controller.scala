@@ -12,6 +12,7 @@ class Controller(var grid: Grid, var player: (Player, Player)) extends Publisher
   //var evaluationGridRequest: Option[Grid] = None
   var gameStatus: GameStatus = IDLE
   private val undoManager = new UndoManager
+  var gridEvaluationStrategy = new GridEvaluationChineseStrategy
 
   def this(grid:Grid, player1: String, player2: String) = this(grid, (Player(player1, Cell(CellStatus.BLACK)), Player(player2, Cell(CellStatus.WHITE))))
 
