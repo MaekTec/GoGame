@@ -21,12 +21,26 @@ class CellClicked(val row: Int, val column: Int) extends Event
 class SwingGui(controller: Controller) extends Frame {
 
   def mouseClick(xCordinate: Int, yCordinate: Int, boardDimension: Dimension): Unit ={
+    val toleranz = 10
     val gridSize = controller.grid.size
-    println(xCordinate + " " + yCordinate + " dim:" + boardDimension)
-
-
+    //println(xCordinate + " " + yCordinate + " dim:" + boardDimension)
+    val boardHight = boardDimension.height - 50
+    val boardWidth = boardDimension.width - 50
+    val x0 = 25
+    val y0 = 25
+    val lines = controller.grid.size - 1
+    val deltaLines = boardHight / lines
+    //println(deltaLines)
+    for( a <- 0 to lines){
+      var pointCol = a* deltaLines + 25
+      for(b <- 0 to lines){
+        var pointRow = b* deltaLines + 25
+        if((xCordinate <=  pointRow  + toleranz  && xCordinate >=  pointRow - toleranz ) && (yCordinate <= pointCol  + toleranz  && yCordinate >=  pointCol -toleranz )) {
+          controller.turn(a, b)
+        }
+      }
+    }
   }
-
 
 
 
@@ -78,7 +92,6 @@ class SwingGui(controller: Controller) extends Frame {
       contents += board
       reactions += {
         case MousePressed(com, point, _, _, _) =>
-          println(this)
           mouseClick(point.x, point.y, this.size)
           board.repaint()
       }
