@@ -21,7 +21,7 @@ class CellClicked(val row: Int, val column: Int) extends Event
 class SwingGui(controller: Controller) extends Frame {
 
   def mouseClick(xCordinate: Int, yCordinate: Int, boardDimension: Dimension): Unit ={
-    val toleranz = 10
+    val toleranz = 25 //todo abhängig machen
     val gridSize = controller.grid.size
     //println(xCordinate + " " + yCordinate + " dim:" + boardDimension)
     val boardHight = boardDimension.height - 50
@@ -63,30 +63,23 @@ class SwingGui(controller: Controller) extends Frame {
     }
     contents += new Menu("Options") {
       mnemonic = Key.O
-      //contents += new MenuItem(Action("Size 1*1") { controller.resize(1) })
-      //contents += new MenuItem(Action("Size 4*4") { controller.resize(4) })
-      //contents += new MenuItem(Action("Size 9*9") { controller.resize(9) })
+      contents += new MenuItem(Action("Size 9*9") { controller.createEmptyGrid(9, ("Player1", "Player2")) })
+      contents += new MenuItem(Action("Size 11*11") { controller.createEmptyGrid(11, ("Player1", "Player2")) })
+      contents += new MenuItem(Action("Size 19*19") { controller.createEmptyGrid(19, ("Player1", "Player2")) })
 
     }
   }
 
 
   val board = new Board(controller, preferredSize)
-
-
-  val panel = new FlowPanel(){
-
-
-
-    //resizable = false
+  val skipButton = new Button("Skip")
+  val gameStatusLabel = new Label("Willkommen")
 
 
 
-      //add(skipButton, BorderPanel.Position.South)
-      //add(board, BorderPanel.Position.Center)
-
-
-    //contents += skipButton
+  val panel = new BoxPanel(Orientation.Vertical) {
+    gameStatusLabel.text = "Willkommem"
+    contents += gameStatusLabel
     contents += new BoxPanel(Orientation.Vertical) {
       listenTo(this.mouse.clicks)
       contents += board
@@ -95,6 +88,14 @@ class SwingGui(controller: Controller) extends Frame {
           mouseClick(point.x, point.y, this.size)
           board.repaint()
       }
+    }
+    contents += skipButton
+    listenTo(skipButton)
+    reactions += {
+      case ButtonClicked(button) => {
+      if( button == skipButton)
+        controller.skipTurn()
+    }
     }
 
 
@@ -108,6 +109,7 @@ class SwingGui(controller: Controller) extends Frame {
   reactions += {
     case event: GridSizeChanged =>
     case event: Played     => repaint()
+      gameStatusLabel.text = GameStatus.message(controller.gameStatus)
   }
 
 
