@@ -1,5 +1,7 @@
 package de.htwg.se.djokajkaeppeler.model
 
+import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus}
+import de.htwg.se.djokajkaeppeler.model.playerComponent.playerBaseImpl.Player
 import org.scalatest._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
