@@ -1,14 +1,13 @@
-package de.htwg.se.djokajkaeppeler.controller
+package de.htwg.se.djokajkaeppeler.controller.controllerComponent.controllerBaseImpl
 
-import de.htwg.se.djokajkaeppeler.model._
-import de.htwg.se.djokajkaeppeler.util.Command
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 import de.htwg.se.djokajkaeppeler.model.gridComponent.GridInterface
 import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus}
-import de.htwg.se.djokajkaeppeler.model.playerComponent.Player
+import de.htwg.se.djokajkaeppeler.model.playerComponent.PlayerInterface
+import de.htwg.se.djokajkaeppeler.util.Command
 
 class TurnCommand(row: Int, col: Int, controller: Controller) extends Command{
-  var memento: (GridInterface, (Player,Player)) = (controller.grid, controller.player)
+  var memento: (GridInterface, (PlayerInterface,PlayerInterface)) = (controller.grid, controller.player)
   override def doStep: Unit =   {
     memento = (controller.grid, controller.player)
 

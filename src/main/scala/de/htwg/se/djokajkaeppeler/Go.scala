@@ -1,7 +1,8 @@
 package de.htwg.se.djokajkaeppeler
 
 import de.htwg.se.djokajkaeppeler.aview._
-import de.htwg.se.djokajkaeppeler.controller.{Controller, Played}
+import de.htwg.se.djokajkaeppeler.controller.Played
+import de.htwg.se.djokajkaeppeler.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.djokajkaeppeler.model._
 import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.Grid
 import de.htwg.se.go.aview.gui.SwingGui
