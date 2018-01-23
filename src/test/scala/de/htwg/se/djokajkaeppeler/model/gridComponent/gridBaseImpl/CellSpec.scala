@@ -1,9 +1,8 @@
-package de.htwg.se.djokajkaeppeler.model
+package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
-import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus}
 import org.junit.runner.RunWith
-import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{Matchers, WordSpec}
 
 @RunWith(classOf[JUnitRunner])
 class CellSpec extends WordSpec with Matchers{

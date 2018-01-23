@@ -1,11 +1,10 @@
-package de.htwg.se.djokajkaeppeler.model
+package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
 import de.htwg.se.djokajkaeppeler.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus, Grid}
 import de.htwg.se.djokajkaeppeler.model.playerComponent.playerBaseImpl.Player
 import org.junit.runner.RunWith
-import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{Matchers, WordSpec}
 
 @RunWith(classOf[JUnitRunner])
 class GameSpec extends WordSpec with Matchers {

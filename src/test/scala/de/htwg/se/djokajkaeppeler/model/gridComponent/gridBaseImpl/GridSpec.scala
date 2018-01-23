@@ -1,9 +1,9 @@
-package de.htwg.se.djokajkaeppeler.model
+package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
-import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus, Grid, Matrix}
+import de.htwg.se.djokajkaeppeler.model.gridComponent.CellInterface
 import org.junit.runner.RunWith
-import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{Matchers, WordSpec}
 
 @RunWith(classOf[JUnitRunner])
 class GridSpec extends WordSpec with Matchers {
@@ -18,7 +18,7 @@ class GridSpec extends WordSpec with Matchers {
       }
       "for test purposes only created with a Matrix of Cells" in {
         val awkwardGrid = Grid(new Matrix(4, new Cell))
-        val testGrid = Grid(Matrix[Cell](Vector(Vector(new Cell, new Cell), Vector(new Cell, new Cell))))
+        val testGrid = Grid(Matrix[CellInterface](Vector(Vector(new Cell, new Cell), Vector(new Cell, new Cell))))
       }
     }
     "created properly but empty" should {
@@ -40,8 +40,8 @@ class GridSpec extends WordSpec with Matchers {
       }
     }
     "prefilled with values CellStatus.WHITE and CellStatus.BLACK alternately" should {
-      val tinyGrid = Grid(new Matrix[Cell](Vector(Vector(Cell(CellStatus.WHITE)))))
-      val smallGrid = Grid(new Matrix[Cell](Vector(Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)))))
+      val tinyGrid = Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE)))))
+      val smallGrid = Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)))))
       "have the right values in the right places" in {
         smallGrid.cellAt(0, 0) should be(Cell(CellStatus.WHITE))
         smallGrid.cellAt(0, 1) should be(Cell(CellStatus.BLACK))

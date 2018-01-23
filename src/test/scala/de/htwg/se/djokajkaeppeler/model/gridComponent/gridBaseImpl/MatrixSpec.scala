@@ -1,6 +1,5 @@
-package de.htwg.se.djokajkaeppeler.model
+package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
-import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{CellStatus, Matrix}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{Matchers, WordSpec}
