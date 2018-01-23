@@ -1,12 +1,13 @@
 package de.htwg.se.djokajkaeppeler.aview
 
-import de.htwg.se.djokajkaeppeler.controller.{Controller, GameStatus}
+import de.htwg.se.djokajkaeppeler.controller.{GameStatus}
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 import de.htwg.se.djokajkaeppeler.controller._
+import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerInterface, GridSizeChanged, Played}
 
 import scala.swing.Reactor
 
-class Tui(controller: Controller) extends Reactor {
+class Tui(controller: ControllerInterface) extends Reactor {
 
   listenTo(controller)
 

@@ -3,11 +3,12 @@ package de.htwg.se.go.aview.gui
 import java.awt.Toolkit
 
 import de.htwg.se.djokajkaeppeler.aview.gui.Board
+import de.htwg.se.djokajkaeppeler.controller.GameStatus
 
 import scala.swing._
 import scala.swing.Swing.LineBorder
 import scala.swing.event._
-import de.htwg.se.djokajkaeppeler.controller._
+import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerInterface, GridSizeChanged, Played}
 import de.htwg.se.djokajkaeppeler.util.Observer
 
 import scala.swing.event.MouseClicked
@@ -18,7 +19,7 @@ import scala.io.Source._
 
 class CellClicked(val row: Int, val column: Int) extends Event
 
-class SwingGui(controller: Controller) extends Frame {
+class SwingGui(controller: ControllerInterface) extends Frame {
 
   def mouseClick(xCordinate: Int, yCordinate: Int, boardDimension: Dimension): Unit ={
     val toleranz = 25 //todo abhängig machen

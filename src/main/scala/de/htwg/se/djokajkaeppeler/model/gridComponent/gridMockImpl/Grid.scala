@@ -33,7 +33,7 @@ class Grid(var size:Int) extends GridInterface {
 }
 
 object EmptyCell extends CellInterface {
-  var status: CellStatus.Value = CellStatus.EMPTY
+  def status: CellStatus.Value = CellStatus.EMPTY
   def isSet: Boolean = false
   def isDead: Boolean = false
   def isAlive: Boolean = false

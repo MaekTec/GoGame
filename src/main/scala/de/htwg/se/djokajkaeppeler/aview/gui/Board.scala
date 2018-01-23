@@ -2,18 +2,15 @@ package de.htwg.se.djokajkaeppeler.aview.gui
 
 import java.awt.geom.{Ellipse2D, Line2D}
 
-import de.htwg.se.djokajkaeppeler.controller._
-
 import scala.swing._
 import scala.swing.{Component, Dimension}
 import java.awt.{BasicStroke, Color, Graphics2D, Toolkit}
 
+import de.htwg.se.djokajkaeppeler.controller.controllerComponent.ControllerInterface
 import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.CellStatus
-import de.htwg.se.go.aview.gui.SwingGui
 
 
-
-class Board(val controller: Controller, var componentSize: Dimension) extends Component{
+class Board(val controller: ControllerInterface, var componentSize: Dimension) extends Component{
 
   componentSize.setSize((componentSize.height * 0.8) toInt, (componentSize.height* 0.8) toInt)
   preferredSize = new Dimension(componentSize.width , componentSize.height)

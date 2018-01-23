@@ -3,7 +3,6 @@ package de.htwg.se.djokajkaeppeler.aview
 import de.htwg.se.djokajkaeppeler.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus, Grid}
 import de.htwg.se.djokajkaeppeler.model.playerComponent.playerBaseImpl.Player
-import de.htwg.se.djokajkaeppeler.model.{CellStatus, Grid}
 import org.junit.runner.RunWith
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.junit.JUnitRunner

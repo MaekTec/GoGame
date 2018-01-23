@@ -8,6 +8,7 @@ import de.htwg.se.djokajkaeppeler.model.playerComponent.PlayerInterface
 import scala.swing.Publisher
 
 trait ControllerInterface extends Publisher{
+  def grid: GridInterface
   def gameStatus: GameStatus
   def gridEvaluationStrategy: GridEvaluationStrategyTemplate
   def asGame: (GridInterface, (PlayerInterface, PlayerInterface))

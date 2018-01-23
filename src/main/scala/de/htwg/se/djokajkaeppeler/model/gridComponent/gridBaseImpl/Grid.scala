@@ -4,7 +4,7 @@ import de.htwg.se.djokajkaeppeler.model.gridComponent.{CellInterface, GridInterf
 
 import scala.collection.mutable.Stack
 
-case class Grid(private val cells:Matrix[CellInterface]) extends GridInterface{
+case class Grid(cells:Matrix[CellInterface]) extends GridInterface{
   def this(size:Int) = this(new Matrix[CellInterface](size, Cell(CellStatus.EMPTY)))
 
   def size:Int = cells.size
@@ -33,13 +33,13 @@ case class Grid(private val cells:Matrix[CellInterface]) extends GridInterface{
     val stack = Stack((row, col))
     while(stack.nonEmpty) {
       val c = stack.pop()
-      cellAt(c._1, c._2).status match {
-        case cellToSearch.status =>
-          filled += c
-          visited += c
-          stack.pushAll(getCellsAround(c._1, c._2).filter(rc => rowColIsValid(rc._1, rc._2)).filter(rc => !visited.contains(rc._1, rc._2)))
-        case _ => visited += c
-          onEdges += cellAt(c._1, c._2)
+      if (cellAt(c._1, c._2).status == cellToSearch.status) {
+        filled += c
+        visited += c
+        stack.pushAll(getCellsAround(c._1, c._2).filter(rc => rowColIsValid(rc._1, rc._2)).filter(rc => !visited.contains(rc._1, rc._2)))
+      } else {
+        visited += c
+        onEdges += cellAt(c._1, c._2)
       }
     }
     (filled, onEdges)
@@ -84,18 +84,19 @@ case class Grid(private val cells:Matrix[CellInterface]) extends GridInterface{
   // returns Cells with no freedoms, or none if the cell has freedoms
   def checkIfCellHasFreedoms(row: Int, col: Int, cell: CellInterface, visited: Set[(Int, Int)]): Option[Set[(Int, Int)]] = {
     val visitedNew = visited + ((row, col))
-    cellAt(row, col).status match {
-      case CellStatus.EMPTY => None
-      case cell.status =>
-        var cells: Set[(Int, Int)] = Set((row, col))
-        for (cellA <- getCellsAround(row, col).filter(rc => rowColIsValid(rc._1, rc._2)).filter(rc => !visitedNew.contains(rc._1, rc._2))) {
-          checkIfCellHasFreedoms(cellA._1, cellA._2, cell, visitedNew) match {
-            case None => return None
-            case Some(s) => cells ++= s
-          }
+    if (cellAt(row, col).status  == CellStatus.EMPTY) {
+      None
+    } else if(cellAt(row, col).status == cell.status) {
+      var cells: Set[(Int, Int)] = Set((row, col))
+      for (cellA <- getCellsAround(row, col).filter(rc => rowColIsValid(rc._1, rc._2)).filter(rc => !visitedNew.contains(rc._1, rc._2))) {
+        checkIfCellHasFreedoms(cellA._1, cellA._2, cell, visitedNew) match {
+          case None => return None
+          case Some(s) => cells ++= s
         }
-        Some(cells)
-      case _ => Some(Set.empty)
+      }
+      Some(cells)
+    } else {
+      Some(Set.empty)
     }
   }
 

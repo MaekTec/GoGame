@@ -20,7 +20,7 @@ trait GridInterface {
 }
 
 trait CellInterface {
-  val status: CellStatus.Value
+  def status: CellStatus.Value
   def isSet: Boolean
   def isDead: Boolean
   def isAlive: Boolean
