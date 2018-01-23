@@ -15,20 +15,16 @@ import de.htwg.se.go.aview.gui.SwingGui
 
 class Board(val controller: Controller, var componentSize: Dimension) extends Component{
 
-  componentSize.setSize((componentSize.height * 0.9) toInt, (componentSize.height* 0.9) toInt)
+  componentSize.setSize((componentSize.height * 0.8) toInt, (componentSize.height* 0.8) toInt)
   preferredSize = new Dimension(componentSize.width , componentSize.height)
 
   override def paintComponent(g : Graphics2D) {
-    //println(self.getSize)
-    //println()
-
-    //this.preferredSize = new Dimension((windowSize.height * 0.7*0.9).toInt , (windowSize.height * 0.7*0.9).toInt)
 
     listenTo(controller)
     val board = controller.grid
     val fields = board.size - 1
 
-
+    //todo alles scaleable machen
 
     g.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
       java.awt.RenderingHints.VALUE_ANTIALIAS_ON)
@@ -53,12 +49,40 @@ class Board(val controller: Controller, var componentSize: Dimension) extends Co
       col <- 0 until board.size
     }  if(board.cellIsSet(row,col)) {
       board.cellAt(row,col).status match {
-        case CellStatus.BLACK => g.setColor(Color.BLACK)
-        case CellStatus.WHITE => g.setColor(Color.WHITE)
-        case _ =>
+        case CellStatus.BLACK =>{
+          g.setColor(Color.BLACK)
+          g.fillOval(col*wid,row*wid, 50, 50)
+        }
+        case CellStatus.WHITE =>{
+          g.setColor(Color.WHITE)
+          g.fillOval(col*wid,row*wid, 50, 50)
+        }
+        case CellStatus.WHITE_TERI=> {
+          g.setColor(Color.WHITE)
+          g.draw(new Ellipse2D.Double(col*wid,row*wid,  50,  50))
+        }
+        case CellStatus.BLACK_TERI=> {
+          g.setColor(Color.BLACK)
+          g.draw(new Ellipse2D.Double(col*wid,row*wid,  50,  50))
+        }
+        case CellStatus.BLACK_MARKED_DEAD=> {
 
+          g.setColor(Color.BLACK)
+          g.fillOval(col*wid,row*wid, 50, 50)
+          g.setColor(Color.RED)
+          g.draw(new Ellipse2D.Double(col*wid,row*wid,  50,  50))
+        }
+        case CellStatus.WHITE_MARKED_DEAD=> {
+
+          g.setColor(Color.WHITE)
+          g.fillOval(col*wid,row*wid, 50, 50)
+          g.setColor(Color.RED)
+          g.draw(new Ellipse2D.Double(col*wid,row*wid,  50,  50))
+
+        }
+        case _ =>
       }
-      g.fillOval(col*wid,row*wid, 50, 50)
+
       //g.draw(new Ellipse2D.Double(col*wid,row*wid,  50,  50))
     }
 
