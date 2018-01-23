@@ -22,7 +22,7 @@ class CellClicked(val row: Int, val column: Int) extends Event
 class SwingGui(controller: ControllerInterface) extends Frame {
 
   def mouseClick(xCordinate: Int, yCordinate: Int, boardDimension: Dimension): Unit ={
-    val toleranz = 25 //todo abhängig machen
+    val toleranz = 5 //todo abhängig machen
     val gridSize = controller.grid.size
     //println(xCordinate + " " + yCordinate + " dim:" + boardDimension)
     val boardHight = boardDimension.height - 50
@@ -73,33 +73,23 @@ class SwingGui(controller: ControllerInterface) extends Frame {
 
 
   val board = new Board(controller, preferredSize)
-  val skipButton = new Button("Skip")
+ val skipButton = new Button("Skip")
   val gameStatusLabel = new Label("Willkommen")
 
 
 
-  val panel = new BoxPanel(Orientation.Vertical) {
-    gameStatusLabel.text = "Willkommem"
-    contents += gameStatusLabel
+  val panel = new FlowPanel() {
     contents += new BoxPanel(Orientation.Vertical) {
       listenTo(this.mouse.clicks)
       contents += board
       reactions += {
         case MousePressed(com, point, _, _, _) =>
+          println(point)
+          println(com)
           mouseClick(point.x, point.y, this.size)
           board.repaint()
       }
     }
-    contents += skipButton
-    listenTo(skipButton)
-    reactions += {
-      case ButtonClicked(button) => {
-      if( button == skipButton)
-        controller.skipTurn()
-    }
-    }
-
-
   }
 
 
@@ -110,13 +100,15 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   reactions += {
     case event: GridSizeChanged =>
     case event: Played     => repaint()
-      gameStatusLabel.text = GameStatus.message(controller.gameStatus)
+
   }
 
 
 
   contents = new BorderPanel {
-    add(panel, BorderPanel.Position.North)
+    add(panel, BorderPanel.Position.Center)
+    add(skipButton, BorderPanel.Position.North)
+    add(gameStatusLabel, BorderPanel.Position.South)
 
   }
 
