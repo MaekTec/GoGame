@@ -62,12 +62,7 @@ class Tui(controller: ControllerInterface) extends Reactor {
 
     def printGameTui: Unit = {
     println(controller.gridToString)
-    if (controller.gameStatus == NEXT_PLAYER) {
-      println(controller.playerAtTurnToString + GameStatus.message(controller.gameStatus))
-    } else {
-      println(controller.playerAtTurnToString)
-      println(GameStatus.message(controller.gameStatus))
-    }
+    println(controller.statusToString)
 
     //controller.gameStatus=IDLE
   }

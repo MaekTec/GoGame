@@ -17,6 +17,7 @@ trait ControllerInterface extends Publisher{
   def createEmptyGrid(size: Int, player: (String, String)):Unit
   def gridToString: String
   def playerAtTurnToString: String
+  def statusToString: String
   def turn(row: Int, col: Int): Unit
   def skipTurn(): Unit
   def set(row: Int, col: Int, value: Int):Unit
