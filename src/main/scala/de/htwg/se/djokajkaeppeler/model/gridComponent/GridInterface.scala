@@ -1,6 +1,6 @@
 package de.htwg.se.djokajkaeppeler.model.gridComponent
 
-import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus}
+import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{CellStatus, Matrix}
 
 trait GridInterface {
   def cellAt(row:Int, col:Int):CellInterface
@@ -19,6 +19,11 @@ trait GridInterface {
   def size:Int
 }
 
+trait GridFactory {
+  def create(size: Int): GridInterface
+  def create(cells:Matrix[CellInterface]): GridInterface
+}
+
 trait CellInterface {
   def status: CellStatus.Value
   def isSet: Boolean
@@ -32,5 +37,10 @@ trait CellInterface {
   def toAlive: CellInterface
   def toDeadOrReverse: CellInterface
   def toAliveAndTerReverse: CellInterface
+}
+
+trait CellFactory {
+  def create(status: CellStatus.Value): CellInterface
+  def create(): CellInterface
 }
 

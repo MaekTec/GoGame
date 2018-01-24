@@ -25,6 +25,11 @@ trait ControllerInterface extends Publisher{
   def toParseInts(c: String):String
 }
 
+trait ControllerFactory {
+  def create(grid: GridInterface, player: (PlayerInterface, PlayerInterface)): ControllerInterface
+  //def create(grid: GridInterface, player1: String, player2: String): ControllerInterface
+}
+
 import scala.swing.event.Event
 
 class Played extends Event

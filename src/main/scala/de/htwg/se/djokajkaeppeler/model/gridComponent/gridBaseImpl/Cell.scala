@@ -1,9 +1,10 @@
 package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
+import com.google.inject.assistedinject.{Assisted, AssistedInject}
 import de.htwg.se.djokajkaeppeler.model.gridComponent.CellInterface
 
-case class Cell(status: CellStatus.Value) extends CellInterface{
-  def this() = this(CellStatus.EMPTY)
+case class Cell @AssistedInject() (@Assisted status: CellStatus.Value) extends CellInterface{
+  @AssistedInject def this() = this(CellStatus.EMPTY)
 
   def isSet: Boolean = status != CellStatus.EMPTY
   def isDead: Boolean = status == CellStatus.WHITE_MARKED_DEAD || status == CellStatus.BLACK_MARKED_DEAD
