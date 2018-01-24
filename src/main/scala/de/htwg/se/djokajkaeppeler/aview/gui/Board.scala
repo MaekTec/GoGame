@@ -33,7 +33,6 @@ class Board(val controller: ControllerInterface, var componentSize: Dimension) e
     val wid = squareSideAssumption / fields
     val squareSide = wid * fields
     val delta = (squareSideAssumption - squareSide) / 2
-    println(delta)
     val circleSize = (wid * 0.9).toInt //todo rechnung
     val deltaEdge = (edgeAssumption/2) - circleSize / 2 + delta
     val x0 = (preferredSize.width - squareSide)/2
@@ -45,7 +44,7 @@ class Board(val controller: ControllerInterface, var componentSize: Dimension) e
     // horizontal linesö
     for (y <- 0 to fields)
       g.draw(new Line2D.Double(x0, y0 + y * wid, x0 + squareSide, y0 + y * wid))
-    g.setStroke(new BasicStroke(fields))
+    g.setStroke(new BasicStroke(3f))
 
     for {
       row <- 0 until board.size

@@ -74,9 +74,7 @@ class SwingGui(controller: ControllerInterface) extends Frame {
 
 
   val board = new Board(controller, preferredSize)
- val skipButton = new Button("Skip")
-  //val gameStatusLabel = new Label("Willkommen")
-
+  val skipButton = new Button("Skip")
 
 
   val HauptPanel = new FlowPanel() {
@@ -85,8 +83,6 @@ class SwingGui(controller: ControllerInterface) extends Frame {
       contents += board
       reactions += {
         case MousePressed(com, point, _, _, _) =>
-          println(point)
-          println(com)
           mouseClick(point.x, point.y, this.size)
           board.repaint()
       }
