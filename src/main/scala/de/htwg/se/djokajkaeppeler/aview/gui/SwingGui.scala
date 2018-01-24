@@ -4,6 +4,7 @@ import java.awt.Toolkit
 
 import de.htwg.se.djokajkaeppeler.aview.gui.Board
 import de.htwg.se.djokajkaeppeler.controller.GameStatus
+import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 
 import scala.swing._
 import scala.swing.Swing.LineBorder
@@ -22,15 +23,15 @@ class CellClicked(val row: Int, val column: Int) extends Event
 class SwingGui(controller: ControllerInterface) extends Frame {
 
   def mouseClick(xCordinate: Int, yCordinate: Int, boardDimension: Dimension): Unit ={
-    val toleranz = 5 //todo abhängig machen
     val gridSize = controller.grid.size
     //println(xCordinate + " " + yCordinate + " dim:" + boardDimension)
     val boardHight = boardDimension.height - 50
-    val boardWidth = boardDimension.width - 50
+    //val boardWidth = boardDimension.width - 50
     val x0 = 25
     val y0 = 25
     val lines = controller.grid.size - 1
     val deltaLines = boardHight / lines
+    val toleranz = deltaLines / 2 //todo abhängig machen
     //println(deltaLines)
     for( a <- 0 to lines){
       var pointCol = a* deltaLines + 25
@@ -47,7 +48,7 @@ class SwingGui(controller: ControllerInterface) extends Frame {
 
   var screeSize = Toolkit.getDefaultToolkit.getScreenSize
   var windowSize = ((screeSize.width min screeSize.height) * 0.7).toInt
-  preferredSize = new Dimension(windowSize, windowSize)
+  preferredSize = new Dimension(windowSize , (windowSize * 1.05).toInt)
   listenTo(controller)
 
 
@@ -74,11 +75,11 @@ class SwingGui(controller: ControllerInterface) extends Frame {
 
   val board = new Board(controller, preferredSize)
  val skipButton = new Button("Skip")
-  val gameStatusLabel = new Label("Willkommen")
+  //val gameStatusLabel = new Label("Willkommen")
 
 
 
-  val panel = new FlowPanel() {
+  val HauptPanel = new FlowPanel() {
     contents += new BoxPanel(Orientation.Vertical) {
       listenTo(this.mouse.clicks)
       contents += board
@@ -92,6 +93,19 @@ class SwingGui(controller: ControllerInterface) extends Frame {
     }
   }
 
+  val gameStatusPanel = new FlowPanel() {
+    val gameStatusLabel = new Label("Willkommen")
+    gameStatusLabel.horizontalAlignment = Alignment.Center
+    contents += gameStatusLabel
+  }
+  listenTo(skipButton)
+
+  reactions += {
+    case ButtonClicked(buttonPressed) =>
+      if(buttonPressed == skipButton) {
+        controller.skipTurn()
+      }
+  }
 
 
 
@@ -100,15 +114,20 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   reactions += {
     case event: GridSizeChanged =>
     case event: Played     => repaint()
+      gameStatusPanel.gameStatusLabel.text = if (controller.gameStatus == NEXT_PLAYER) {
+        controller.playerAtTurnToString + " " + GameStatus.message(controller.gameStatus)
+      } else {
+        controller.playerAtTurnToString + " " + GameStatus.message(controller.gameStatus)
+      }
 
   }
 
 
 
   contents = new BorderPanel {
-    add(panel, BorderPanel.Position.Center)
-    add(skipButton, BorderPanel.Position.North)
-    add(gameStatusLabel, BorderPanel.Position.South)
+    add(HauptPanel, BorderPanel.Position.Center)
+    add(skipButton, BorderPanel.Position.South)
+    add(gameStatusPanel, BorderPanel.Position.North)
 
   }
 
