@@ -14,7 +14,7 @@ class Controller(var grid: GridInterface, var player: (PlayerInterface, PlayerIn
   grid = new Grid(1)
   player = (Player("Player 1", Cell(CellStatus.BLACK)), Player("Player 2", Cell(CellStatus.WHITE)))
 
-  def gameStatus: GameStatus = GameStatus.IDLE
+  def gameStatus: GameStatus = GameStatus.NEXT_PLAYER
 
   def gridEvaluationStrategy: GridEvaluationStrategyTemplate = new GridEvaluationChineseStrategy
 
@@ -29,6 +29,8 @@ class Controller(var grid: GridInterface, var player: (PlayerInterface, PlayerIn
   def gridToString: String = grid.toString
 
   def playerAtTurnToString: String = player._1.toString
+
+  def statusToString: String = GameStatus.message(gameStatus)
 
   def turn(row: Int, col: Int): Unit = {}
 

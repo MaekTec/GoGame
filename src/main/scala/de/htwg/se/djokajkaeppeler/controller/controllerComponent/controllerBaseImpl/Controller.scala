@@ -4,6 +4,7 @@ import com.google.inject.assistedinject.{Assisted, AssistedInject}
 import net.codingwell.scalaguice.InjectorExtensions._
 import com.google.inject.{Guice, Inject}
 import de.htwg.se.djokajkaeppeler.GoModule
+import de.htwg.se.djokajkaeppeler.controller.GameStatus
 import de.htwg.se.djokajkaeppeler.controller.GameStatus.{GameStatus, _}
 import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerInterface, Played}
 import de.htwg.se.djokajkaeppeler.model.gridComponent.{CellFactory, GridFactory, GridInterface}
@@ -27,7 +28,7 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
         .instance[CellFactory].create(CellStatus.WHITE))))*/
 
   //var evaluationGridRequest: Option[Grid] = None
-  var gameStatus: GameStatus = IDLE
+  var gameStatus: GameStatus = NEXT_PLAYER
   private val undoManager = new UndoManager
   val gridEvaluationStrategy = new GridEvaluationChineseStrategy
   val injector = Guice.createInjector(new GoModule)
@@ -42,11 +43,19 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
     this.grid = grid
     this.player = (injector.instance[PlayerFactory].create(player._1, injector.instance[CellFactory].create(CellStatus.BLACK)),
       injector.instance[PlayerFactory].create(player._2, injector.instance[CellFactory].create(CellStatus.WHITE)))
+    gameStatus = NEXT_PLAYER
     publish(new Played)
   }
 
   def gridToString: String = grid.toString
   def playerAtTurnToString: String = playerAtTurn.name
+
+  def statusToString: String = {
+    gameStatus match {
+      case NEXT_PLAYER => playerAtTurnToString + GameStatus.message(gameStatus)
+      case _ => GameStatus.message(gameStatus)
+    }
+  }
 
   def turn(row: Int, col: Int): Unit = {
     undoManager.doStep(new TurnCommand(row, col, this))

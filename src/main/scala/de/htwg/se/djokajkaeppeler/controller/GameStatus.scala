@@ -2,12 +2,11 @@ package de.htwg.se.djokajkaeppeler.controller
 
 object GameStatus extends Enumeration {
   type GameStatus = Value
-  val IDLE, NEXT_PLAYER, MOVE_NOT_VALID, SKIPPED,
+  val NEXT_PLAYER, MOVE_NOT_VALID, SKIPPED,
   IN_EVALUATION_MARK, IN_EVALUATION_CONFIRM_OR_MARK, PLAYOUT_OR_GAME_OVER,
   GAME_OVER = Value
 
   val map = Map[GameStatus, String](
-    IDLE -> "",
     NEXT_PLAYER -> " is at turn",
     MOVE_NOT_VALID ->"This move isn't valid",
     SKIPPED ->"Player skipped",
