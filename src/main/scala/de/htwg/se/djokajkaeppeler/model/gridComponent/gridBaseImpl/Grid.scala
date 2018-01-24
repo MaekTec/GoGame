@@ -1,11 +1,12 @@
 package de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl
 
+import com.google.inject.assistedinject.{Assisted, AssistedInject}
 import de.htwg.se.djokajkaeppeler.model.gridComponent.{CellInterface, GridInterface}
 
 import scala.collection.mutable.Stack
 
-case class Grid(cells:Matrix[CellInterface]) extends GridInterface{
-  def this(size:Int) = this(new Matrix[CellInterface](size, Cell(CellStatus.EMPTY)))
+case class Grid @AssistedInject() (@Assisted cells:Matrix[CellInterface]) extends GridInterface{
+  @AssistedInject() def this(@Assisted size:Int) = this(new Matrix[CellInterface](size, Cell(CellStatus.EMPTY).asInstanceOf[CellInterface]))
 
   def size:Int = cells.size
 

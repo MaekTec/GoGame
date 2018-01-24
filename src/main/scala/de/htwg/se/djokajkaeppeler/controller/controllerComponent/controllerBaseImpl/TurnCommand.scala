@@ -1,8 +1,9 @@
 package de.htwg.se.djokajkaeppeler.controller.controllerComponent.controllerBaseImpl
 
+import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
-import de.htwg.se.djokajkaeppeler.model.gridComponent.GridInterface
-import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus}
+import de.htwg.se.djokajkaeppeler.model.gridComponent.{CellFactory, GridInterface}
+import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.CellStatus
 import de.htwg.se.djokajkaeppeler.model.playerComponent.PlayerInterface
 import de.htwg.se.djokajkaeppeler.util.Command
 
@@ -24,7 +25,7 @@ class TurnCommand(row: Int, col: Int, controller: Controller) extends Command{
           var newGrid = controller.grid.set(row, col, controller.playerAtTurn.cellstatus)
           if (newGrid.checkIfMoveIsValid(row, col, controller.playerAtTurn.cellstatus)) {
             newGrid.checkForHits(row, col, controller.playerAtTurn.cellstatus) match {
-              case Some(c) => c.foreach(rc => newGrid = newGrid.set(rc._1, rc._2, Cell(CellStatus.EMPTY)))
+              case Some(c) => c.foreach(rc => newGrid = newGrid.set(rc._1, rc._2, controller.injector.instance[CellFactory].create(CellStatus.EMPTY)))
               case None =>
             }
             controller.grid = newGrid
