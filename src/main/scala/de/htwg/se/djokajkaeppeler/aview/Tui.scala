@@ -1,22 +1,23 @@
 package de.htwg.se.djokajkaeppeler.aview
 
-import de.htwg.se.djokajkaeppeler.controller.{GameStatus}
+import de.htwg.se.djokajkaeppeler.controller.GameStatus
 import de.htwg.se.djokajkaeppeler.controller.GameStatus._
 import de.htwg.se.djokajkaeppeler.controller._
 import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerInterface, GridSizeChanged, Played}
+import com.typesafe.scalalogging.{LazyLogging, Logger}
 
 import scala.swing.Reactor
 
-class Tui(controller: ControllerInterface) extends Reactor {
+class Tui(controller: ControllerInterface) extends Reactor with LazyLogging {
 
   listenTo(controller)
 
   val size = 11
   var players: (String, String) = ("Player 1", "Player 2")
 
-  println("Eingabeformat:")
-  println("New game: n [Gridsize] [Player 1 name] [Player 2 name]")
-  println("In game: row colum")
+  logger.info("Eingabeformat:")
+  logger.info("New game: n [Gridsize] [Player 1 name] [Player 2 name]")
+  logger.info("In game: row colum")
 
   def processInputLine(input: String): Unit = {
     val in = input.split(" ")
@@ -61,8 +62,8 @@ class Tui(controller: ControllerInterface) extends Reactor {
 
 
     def printGameTui: Unit = {
-    println(controller.gridToString)
-    println(controller.statusToString)
+      logger.info(controller.gridToString)
+      logger.info(controller.statusToString)
 
     //controller.gameStatus=IDLE
   }

@@ -22,7 +22,7 @@ class GoModule extends AbstractModule with ScalaModule{
     install(new FactoryModuleBuilder().implement(classOf[ControllerInterface], classOf[controllerBaseImpl.Controller]).build(classOf[ControllerFactory]))
     bind[CellInterface].to[Cell]
 
-    bind[FileIOInterface].to[fileIoXmlImpl.FileIO]
+    bind[FileIOInterface].to[fileIoJsonImpl.FileIO]
 
   }
 
