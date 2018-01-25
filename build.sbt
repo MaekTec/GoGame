@@ -27,3 +27,5 @@ libraryDependencies += "com.google.inject.extensions" % "guice-assistedinject" %
 
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.6"
 
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+
