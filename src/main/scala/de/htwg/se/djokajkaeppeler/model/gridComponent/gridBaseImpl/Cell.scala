@@ -44,6 +44,11 @@ case class Cell @AssistedInject() (@Assisted status: CellStatus.Value) extends C
     case _ => Cell(status)
   }
 
+  def fromDeadToEmpty: CellInterface = status match {
+    case CellStatus.WHITE_MARKED_DEAD | CellStatus.BLACK_MARKED_DEAD=> Cell(CellStatus.EMPTY)
+    case _ => Cell(status)
+  }
+
   def toDeadOrReverse: CellInterface = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_MARKED_DEAD)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_MARKED_DEAD)

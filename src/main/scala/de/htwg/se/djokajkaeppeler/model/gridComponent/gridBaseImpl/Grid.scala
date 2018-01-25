@@ -133,7 +133,7 @@ case class Grid @AssistedInject() (@Assisted cells:Matrix[CellInterface]) extend
     for {
       row <- 0 until size
       col <- 0 until size
-    } gridNew = gridNew.set(row, col, cellAt(row, col).toAlive)
+    } gridNew = gridNew.set(row, col, cellAt(row, col).fromDeadToEmpty)
     gridNew
   }
 
