@@ -13,10 +13,12 @@ trait ControllerInterface extends Publisher{
   def gridEvaluationStrategy: GridEvaluationStrategyTemplate
   def asGame: (GridInterface, (PlayerInterface, PlayerInterface))
   def playerAtTurn : PlayerInterface
+  def playerNotAtTurn : PlayerInterface
   def setNextPlayer : Unit
   def createEmptyGrid(size: Int, player: (String, String)):Unit
   def gridToString: String
   def playerAtTurnToString: String
+  def playerNotAtTurnToString: String
   def statusToString: String
   def turn(row: Int, col: Int): Unit
   def skipTurn(): Unit

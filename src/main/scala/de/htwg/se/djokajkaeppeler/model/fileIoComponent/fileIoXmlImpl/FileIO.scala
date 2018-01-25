@@ -9,7 +9,11 @@ import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerFact
 import de.htwg.se.djokajkaeppeler.model.fileIoComponent.FileIOInterface
 import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{CellStatus, Grid}
 import de.htwg.se.djokajkaeppeler.model.gridComponent.{CellFactory, GridInterface}
-import de.htwg.se.djokajkaeppeler.model.playerComponent.PlayerFactory
+import de.htwg.se.djokajkaeppeler.model.playerComponent.{PlayerFactory, PlayerInterface}
+import java.nio.file.Files
+import java.nio.file.Paths
+
+import de.htwg.se.djokajkaeppeler.controller.GameStatus.GameStatus
 
 import scala.xml.{NodeSeq, PrettyPrinter}
 
@@ -19,6 +23,7 @@ class FileIO extends FileIOInterface {
     var grid: GridInterface = null
     val file = scala.xml.XML.loadFile("grid.xml")
     val sizeAttr = (file \\ "grid" \ "@size")
+    val playerOneName = (file \\ "")
     val size = sizeAttr.text.toInt
     val injector = Guice.createInjector(new GoModule).instance[ControllerFactory].create(
       new Grid(size),
@@ -41,21 +46,39 @@ class FileIO extends FileIOInterface {
     grid
   }
 
-  def save(controller: ControllerInterface): Unit = {
-    scala.xml.XML.save("Go.xml", controllerToXml(controller))
+
+
+  def save(player: (PlayerInterface,PlayerInterface), grid : GridInterface, state: GameStatus): Unit = {
+    scala.xml.XML.save("Go.xml", controllerToXml(player, grid, state))
   }
 
+
+/*
   def saveXML(controller: ControllerInterface): Unit = {
     scala.xml.XML.save("grid.xml", controllerToXml(controller))
   }
+*/
 
-  def saveString(controller: ControllerInterface): Unit = {
-    import java.io._
-    val pw = new PrintWriter(new File("Go.xml"))
-    val prettyPrinter = new PrettyPrinter(120, 4)
-    val xml = prettyPrinter.format(gridToXml(grid))
-    pw.write(xml)
-    pw.close
+  def controllerToXml(player: (PlayerInterface,PlayerInterface), grid : GridInterface, state: GameStatus) = {
+    <go>
+      <information>
+        <activePlayer>
+          { player._1.name }
+        </activePlayer>
+        <activePlayerCellstatus>
+          { player._1.cellstatus }
+        </activePlayerCellstatus>
+        <otherPlayer>
+          { player._2.name}
+        </otherPlayer>
+        <otherPlayerColor>
+          { player._2.cellstatus}
+        </otherPlayerColor>
+        <state>
+          { state }
+        </state>
+      </information>{ gridToXml(grid) }
+    </go>
   }
   def gridToXml(grid: GridInterface) = {
     <grid size={ grid.size.toString }>
@@ -68,6 +91,9 @@ class FileIO extends FileIOInterface {
     </grid>
   }
 
-
-
+  def cellToXml(grid:GridInterface, row:Int, col:Int) ={
+    <cell row ={row.toString} col={col.toString}>
+      {grid.cellAt(row,col).status}
+    </cell>
+  }
 }

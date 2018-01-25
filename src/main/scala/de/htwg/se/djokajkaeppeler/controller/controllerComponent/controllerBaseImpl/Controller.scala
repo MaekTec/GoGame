@@ -36,6 +36,7 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
   def asGame: (GridInterface, (PlayerInterface, PlayerInterface)) = (grid, player)
 
   def playerAtTurn : PlayerInterface = player._1
+  def playerNotAtTurn: PlayerInterface = player._2
   def setNextPlayer : Unit = player = player.swap
 
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {
