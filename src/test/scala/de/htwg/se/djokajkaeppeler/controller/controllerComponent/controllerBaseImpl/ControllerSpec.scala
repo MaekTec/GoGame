@@ -1,5 +1,6 @@
 package de.htwg.se.djokajkaeppeler.controller.controllerComponent.controllerBaseImpl
 
+
 import de.htwg.se.djokajkaeppeler.controller.GameStatus
 import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellStatus, Grid}
 import de.htwg.se.djokajkaeppeler.model.playerComponent.playerBaseImpl.Player
@@ -197,6 +198,17 @@ class ControllerSpec extends WordSpec with Matchers{
       "with WHITE the cell is set" in {
         controller.grid.cellAt(1, 1) should be(Cell(CellStatus.WHITE))
         controller.grid.cellAt(0, 0) should be(Cell(CellStatus.EMPTY))
+      }
+      "when a game is saved and loaded" should {
+        val smallGrid = new Grid(11)
+        val controller = new Controller(smallGrid, "Player 1", "Player 2")
+        controller.save()
+        val controllerTest = new Controller(new Grid(3), "p1", "p2")
+        controllerTest.load()
+        "be the same" in {
+          controller.grid should be(controllerTest.grid)
+        }
+
       }
     }
   }

@@ -77,16 +77,6 @@ class FileIO extends FileIOInterface {
 
 
 
-  def saveXML(grid : GridInterface, state: GameStatus,player: (PlayerInterface,PlayerInterface)): Unit = {
-    scala.xml.XML.save("Go.xml", controllerToXml(grid, state,player))
-  }
-/*
-  def saveXML(controller: ControllerInterface): Unit = {
-    scala.xml.XML.save("grid.xml", controllerToXml(controller))
-  }
-*/
-
-
   def controllerToXml(grid : GridInterface, state: GameStatus,player: (PlayerInterface,PlayerInterface)) = {
     <go>
       <information>
