@@ -110,12 +110,7 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   reactions += {
     case event: GridSizeChanged =>
     case event: Played     => repaint()
-      gameStatusPanel.gameStatusLabel.text = if (controller.gameStatus == NEXT_PLAYER) {
-        controller.playerAtTurnToString + " " + GameStatus.message(controller.gameStatus)
-      } else {
-        controller.playerAtTurnToString + " " + GameStatus.message(controller.gameStatus)
-      }
-
+      gameStatusPanel.gameStatusLabel.text = controller.statusToString
   }
 
 
