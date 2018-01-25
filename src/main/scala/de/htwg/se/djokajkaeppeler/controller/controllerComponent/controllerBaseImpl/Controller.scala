@@ -60,7 +60,7 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
     gameStatus match {
       case NEXT_PLAYER => playerAtTurnToString + GameStatus.message(gameStatus)
       case GAME_OVER =>
-        var (playerWhite, playerBlack) = if(player._1.cellstatus == CellStatus.WHITE) {
+        var (playerWhite, playerBlack) = if(player._1.cellstatus.status == CellStatus.WHITE) {
           (player._1, player._2)
         } else {
           (player._2, player._1)

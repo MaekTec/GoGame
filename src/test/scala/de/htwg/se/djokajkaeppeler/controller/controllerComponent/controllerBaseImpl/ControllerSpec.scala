@@ -159,9 +159,6 @@ class ControllerSpec extends WordSpec with Matchers{
     "when player white wins the game" should {
       val smallGrid = new Grid(4)
       val controller = new Controller(smallGrid, "Player 1", "Player 2")
-      /*" " in {
-        controller.playerAtTurn should be("Player 1")
-      }*/
       controller.turn(0, 0)
       controller.skipTurn()
       controller.skipTurn()
@@ -170,7 +167,24 @@ class ControllerSpec extends WordSpec with Matchers{
       controller.skipTurn()
       "the game status is GAME_OVER" in {
         controller.gameStatus should be(GameStatus.GAME_OVER)
-        controller.statusToString should be("Player 2 won the game with 16 to 0 Points")
+        controller.statusToString should be("Player 1 won the game with 16 to 0 Points")
+      }
+    }
+    "when player black wins the game" should {
+      val smallGrid = new Grid(4)
+      val controller = new Controller(smallGrid, "Player 1", "Player 2")
+      controller.skipTurn()
+      controller.turn(1, 0)
+      controller.turn(0, 0)
+      controller.turn(0, 1)
+      controller.skipTurn()
+      controller.skipTurn()
+      controller.skipTurn()
+      controller.skipTurn()
+      controller.skipTurn()
+      "the game status is GAME_OVER" in {
+        controller.gameStatus should be(GameStatus.GAME_OVER)
+        controller.statusToString should be("Player 2 won the game with 0 to 16 Points")
       }
     }
     "when a player tries to kill self, the move isn't vaild" should {
