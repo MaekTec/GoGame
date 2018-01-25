@@ -78,7 +78,7 @@ class GridSpec extends WordSpec with Matchers {
         smallGrid.allDeathCellsToAliveAndTeriReverse() should be(Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK))))))
       }
       "can make all dead stones to alive" in {
-        smallGrid.removeAllDeadCells() should be(Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.BLACK))))))
+        smallGrid.removeAllDeadCells() should be(Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.EMPTY)), Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.EMPTY))))))
       }
     }
     /*"prefilled at 1,1" should {
