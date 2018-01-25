@@ -9,8 +9,8 @@ class GridEvaluationChineseStrategy extends GridEvaluationStrategyTemplate {
     var whitePoints = 0
     var blackPoints = 0
     for {
-      row <- 0 until grid.size
-      col <- 0 until grid.size
+      row <- 0 until gridToCount.size
+      col <- 0 until gridToCount.size
     } gridToCount.cellAt(row, col).status match {
       case CellStatus.BLACK | CellStatus.BLACK_TERI => blackPoints += 1
       case CellStatus.WHITE | CellStatus.WHITE_TERI => whitePoints += 1

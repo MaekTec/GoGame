@@ -43,6 +43,7 @@ object EmptyCell extends CellInterface {
   def toTeriReverse: CellInterface = Cell(CellStatus.EMPTY)
   def toDead: CellInterface = Cell(CellStatus.EMPTY)
   def toAlive: CellInterface = Cell(CellStatus.EMPTY)
+  def fromDeadToEmpty: CellInterface = Cell(CellStatus.EMPTY)
   def toDeadOrReverse: CellInterface = Cell(CellStatus.EMPTY)
   def toAliveAndTerReverse: CellInterface = Cell(CellStatus.EMPTY)
 }

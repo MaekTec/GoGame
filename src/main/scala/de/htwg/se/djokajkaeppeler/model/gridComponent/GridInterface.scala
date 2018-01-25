@@ -35,6 +35,7 @@ trait CellInterface {
   def toTeriReverse: CellInterface
   def toDead: CellInterface
   def toAlive: CellInterface
+  def fromDeadToEmpty: CellInterface
   def toDeadOrReverse: CellInterface
   def toAliveAndTerReverse: CellInterface
 }

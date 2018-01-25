@@ -25,3 +25,5 @@ libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
 
 libraryDependencies += "com.google.inject.extensions" % "guice-assistedinject" % "4.1.0"
 
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.6"
+

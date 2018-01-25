@@ -44,6 +44,11 @@ case class Cell @AssistedInject() (@Assisted status: CellStatus.Value) extends C
     case _ => Cell(status)
   }
 
+  def fromDeadToEmpty: CellInterface = status match {
+    case CellStatus.WHITE_MARKED_DEAD | CellStatus.BLACK_MARKED_DEAD=> Cell(CellStatus.EMPTY)
+    case _ => Cell(status)
+  }
+
   def toDeadOrReverse: CellInterface = status match {
     case CellStatus.WHITE => Cell(CellStatus.WHITE_MARKED_DEAD)
     case CellStatus.BLACK => Cell(CellStatus.BLACK_MARKED_DEAD)
@@ -69,4 +74,23 @@ case class Cell @AssistedInject() (@Assisted status: CellStatus.Value) extends C
 
 object CellStatus extends Enumeration {
   val EMPTY, BLACK, WHITE, BLACK_TERI, WHITE_TERI, BLACK_MARKED_DEAD, WHITE_MARKED_DEAD = Value
+
+  def fromString(s: String): Option[CellStatus.Value] = s.trim match {
+    case "EMPTY" =>
+      Some(EMPTY)
+    case "BLACK" =>
+      Some(BLACK)
+    case "WHITE" =>
+      Some(WHITE)
+    case "BLACK_TERI" =>
+      Some(BLACK_TERI)
+    case "WHITE_TERI" =>
+      Some(WHITE_TERI)
+    case "BLACK_MARKED_DEAD" =>
+      Some(BLACK_MARKED_DEAD)
+    case "WHITE_MARKED_DEAD" =>
+      Some(WHITE_MARKED_DEAD)
+    case _ =>
+      None
+  }
 }

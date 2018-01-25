@@ -8,6 +8,7 @@ import de.htwg.se.djokajkaeppeler.model.gridComponent.gridBaseImpl.{Cell, CellSt
 import de.htwg.se.djokajkaeppeler.model.playerComponent.{PlayerFactory, PlayerInterface}
 import de.htwg.se.djokajkaeppeler.model.playerComponent.playerBaseImpl.Player
 import net.codingwell.scalaguice.ScalaModule
+import de.htwg.se.djokajkaeppeler.model.fileIoComponent._
 
 class GoModule extends AbstractModule with ScalaModule{
 
@@ -20,6 +21,9 @@ class GoModule extends AbstractModule with ScalaModule{
     install(new FactoryModuleBuilder().implement(classOf[CellInterface], classOf[Cell]).build(classOf[CellFactory]))
     install(new FactoryModuleBuilder().implement(classOf[ControllerInterface], classOf[controllerBaseImpl.Controller]).build(classOf[ControllerFactory]))
     bind[CellInterface].to[Cell]
+
+    bind[FileIOInterface].to[fileIoXmlImpl.FileIO]
+
   }
 
 }

@@ -48,11 +48,19 @@ class SwingGui(controller: ControllerInterface) extends Frame {
 
   var screeSize = Toolkit.getDefaultToolkit.getScreenSize
   var windowSize = ((screeSize.width min screeSize.height) * 0.7).toInt
-  preferredSize = new Dimension(windowSize , (windowSize * 1.05).toInt)
+  preferredSize = new Dimension(windowSize , (windowSize * 1.08).toInt)
   listenTo(controller)
 
 
   menuBar = new MenuBar {
+    contents += new Menu("File") {
+      mnemonic = Key.F
+     // contents += new MenuItem(Action("Empty") { controller.createDefaultEmptyGrid})
+     // contents += new MenuItem(Action("New") { controller.createNewGrid })
+      contents += new MenuItem(Action("Save") {controller.save})
+      contents += new MenuItem(Action("Load") {controller.load})
+      contents += new MenuItem(Action("Quit") { System.exit(0) })
+    }
 
     contents += new Menu("Edit") {
       mnemonic = Key.E
