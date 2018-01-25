@@ -17,6 +17,7 @@ import net.codingwell.scalaguice.InjectorExtensions._
 
 @RunWith(classOf[JUnitRunner])
 class FileIOSpec extends WordSpec with Matchers {
+  /*
   "A Json file" when {
     val injector = Guice.createInjector(new GoModule)
     val fileIo = new FileIO
@@ -41,6 +42,6 @@ class FileIOSpec extends WordSpec with Matchers {
 
 
   }
-
+  */
 
 }
