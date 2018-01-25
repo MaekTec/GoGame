@@ -69,4 +69,23 @@ case class Cell @AssistedInject() (@Assisted status: CellStatus.Value) extends C
 
 object CellStatus extends Enumeration {
   val EMPTY, BLACK, WHITE, BLACK_TERI, WHITE_TERI, BLACK_MARKED_DEAD, WHITE_MARKED_DEAD = Value
+
+  def fromString(s: String): Option[CellStatus.Value] = s.trim match {
+    case "EMPTY" =>
+      Some(EMPTY)
+    case "BLACK" =>
+      Some(BLACK)
+    case "WHITE" =>
+      Some(WHITE)
+    case "BLACK_TERI" =>
+      Some(BLACK_TERI)
+    case "WHITE_TERI" =>
+      Some(WHITE_TERI)
+    case "BLACK_MARKED_DEAD" =>
+      Some(BLACK_MARKED_DEAD)
+    case "WHITE_MARKED_DEAD" =>
+      Some(WHITE_MARKED_DEAD)
+    case _ =>
+      None
+  }
 }

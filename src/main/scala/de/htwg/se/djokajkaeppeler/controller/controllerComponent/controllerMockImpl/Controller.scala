@@ -22,6 +22,8 @@ class Controller(var grid: GridInterface, var player: (PlayerInterface, PlayerIn
 
   def playerAtTurn : PlayerInterface = player._1
 
+  def playerNotAtTurn : PlayerInterface = player._2
+
   def setNextPlayer : Unit = {}
 
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {}
@@ -29,6 +31,8 @@ class Controller(var grid: GridInterface, var player: (PlayerInterface, PlayerIn
   def gridToString: String = grid.toString
 
   def playerAtTurnToString: String = player._1.toString
+
+  def playerNotAtTurnToString: String = player._2.toString
 
   def statusToString: String = GameStatus.message(gameStatus)
 
@@ -43,5 +47,10 @@ class Controller(var grid: GridInterface, var player: (PlayerInterface, PlayerIn
   def redo: Unit = {}
 
   def toParseInts(c: String):String = ""
+
+  def save: Unit = {}
+
+  def load: Unit = {}
+
 
 }

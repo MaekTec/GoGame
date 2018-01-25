@@ -4,6 +4,7 @@ import com.google.inject.assistedinject.{Assisted, AssistedInject}
 import net.codingwell.scalaguice.InjectorExtensions._
 import com.google.inject.{Guice, Inject}
 import de.htwg.se.djokajkaeppeler.GoModule
+import de.htwg.se.djokajkaeppeler.model.fileIoComponent._
 import de.htwg.se.djokajkaeppeler.controller.GameStatus
 import de.htwg.se.djokajkaeppeler.controller.GameStatus.{GameStatus, _}
 import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerInterface, Played}
@@ -32,10 +33,12 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
   private val undoManager = new UndoManager
   val gridEvaluationStrategy = new GridEvaluationChineseStrategy
   val injector = Guice.createInjector(new GoModule)
+  val fileIo = injector.instance[FileIOInterface]
 
   def asGame: (GridInterface, (PlayerInterface, PlayerInterface)) = (grid, player)
 
   def playerAtTurn : PlayerInterface = player._1
+  def playerNotAtTurn: PlayerInterface = player._2
   def setNextPlayer : Unit = player = player.swap
 
   def createEmptyGrid(size: Int, player: (String, String)):Unit = {
@@ -49,6 +52,7 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
 
   def gridToString: String = grid.toString
   def playerAtTurnToString: String = playerAtTurn.name
+  def playerNotAtTurnToString: String = playerNotAtTurn.toString
 
   def statusToString: String = {
     gameStatus match {
@@ -82,6 +86,28 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
     publish(new Played)
   }
 
+  def save: Unit = {
+    fileIo.save(grid,gameStatus,player)
+    publish(new Played)
+  }
+
+  def load: Unit = {
+    val gridOption = fileIo.load
+    gridOption match {
+      case None => {
+
+      }
+      case Some(game) => {
+        grid = game._1
+        gameStatus = game._2
+        player = game._3
+      }
+    }
+    publish(new Played)
+  }
+
+
+
   def toParseInts(c: String):String = {
     c match {
       case "b" => "1"
@@ -93,5 +119,6 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
       case something => something
     }
   }
+
 
 }
