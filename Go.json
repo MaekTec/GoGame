@@ -1,0 +1,495 @@
+{
+  "state" : "NEXT_PLAYER",
+  "playerOne" : "Player 1",
+  "playerTwo" : "Player 2",
+  "playerOneCellstatus" : "BLACK",
+  "playerTwoCellstatus" : "WHITE",
+  "grid" : {
+    "size" : 11,
+    "cells" : [ {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 0,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 1,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 0
+    }, {
+      "cellstatus" : "BLACK",
+      "row" : 2,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 5
+    }, {
+      "cellstatus" : "WHITE",
+      "row" : 2,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 2,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 2
+    }, {
+      "cellstatus" : "WHITE",
+      "row" : 3,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 6
+    }, {
+      "cellstatus" : "BLACK",
+      "row" : 3,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 3,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 3
+    }, {
+      "cellstatus" : "BLACK",
+      "row" : 4,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 4,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 6
+    }, {
+      "cellstatus" : "WHITE",
+      "row" : 5,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 5,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 2
+    }, {
+      "cellstatus" : "WHITE",
+      "row" : 6,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 4
+    }, {
+      "cellstatus" : "BLACK",
+      "row" : 6,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 6,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 2
+    }, {
+      "cellstatus" : "BLACK",
+      "row" : 7,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 7,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 4
+    }, {
+      "cellstatus" : "WHITE",
+      "row" : 8,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 8,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 9,
+      "col" : 10
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 0
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 1
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 2
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 3
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 4
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 5
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 6
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 7
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 8
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 9
+    }, {
+      "cellstatus" : "EMPTY",
+      "row" : 10,
+      "col" : 10
+    } ]
+  }
+}
