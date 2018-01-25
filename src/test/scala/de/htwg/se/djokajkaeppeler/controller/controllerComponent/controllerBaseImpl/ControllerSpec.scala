@@ -204,10 +204,11 @@ class ControllerSpec extends WordSpec with Matchers{
         val controller = new Controller(smallGrid, "Player 1", "Player 2")
         controller.save()
         val controllerTest = new Controller(new Grid(3), "p1", "p2")
-        controller.load()
+        controllerTest.load()
         "be the same" in {
-          controller should be(controllerTest)
+          controller.grid should be(controllerTest.grid)
         }
+
       }
     }
   }

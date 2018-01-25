@@ -110,9 +110,7 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
   def load: Unit = {
     val gridOption = fileIo.load
     gridOption match {
-      case None => {
-
-      }
+      case None => {}
       case Some(game) => {
         grid = game._1
         gameStatus = game._2
