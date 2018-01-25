@@ -48,6 +48,12 @@ class GridSpec extends WordSpec with Matchers {
         smallGrid.cellAt(1, 0) should be(Cell(CellStatus.WHITE))
         smallGrid.cellAt(1, 1) should be(Cell(CellStatus.BLACK))
       }
+      "can search for cells which are connected to each other" in {
+        smallGrid.getSetFilled(0, 0, Cell(CellStatus.WHITE))  should be((Set((0, 0), (1, 0)), Set(Cell(CellStatus.BLACK))))
+      }
+      "can be marked as a dead group" in {
+        smallGrid.markOrUnmarkDeadGroup(0, 0) should be(Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE_MARKED_DEAD), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE_MARKED_DEAD), Cell(CellStatus.BLACK))))))
+      }
     }
     "prefilled with 1 to n on the diagonal" should {
       val normalGrid = new Grid(9)
@@ -64,6 +70,15 @@ class GridSpec extends WordSpec with Matchers {
         diagonalGrid.cellAt(8, 0) should be(Cell(CellStatus.EMPTY))
         diagonalGrid.cellAt(8, 4) should be(Cell(CellStatus.EMPTY))
         diagonalGrid.cellAt(8, 8) should be(Cell(CellStatus.BLACK))
+      }
+    }
+    "prefilled with dead and teritory stones alternaly" should {
+      val smallGrid = Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.BLACK_MARKED_DEAD)), Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.BLACK_MARKED_DEAD)))))
+      "can be made alive and teri reverse" in {
+        smallGrid.allDeathCellsToAliveAndTeriReverse() should be(Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE), Cell(CellStatus.BLACK))))))
+      }
+      "can make all dead stones to alive" in {
+        smallGrid.removeAllDeadCells() should be(Grid(new Matrix[CellInterface](Vector(Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.BLACK)), Vector(Cell(CellStatus.WHITE_TERI), Cell(CellStatus.BLACK))))))
       }
     }
     /*"prefilled at 1,1" should {
