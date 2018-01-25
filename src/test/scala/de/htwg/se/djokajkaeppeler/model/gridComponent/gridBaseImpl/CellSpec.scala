@@ -76,6 +76,16 @@ class CellSpec extends WordSpec with Matchers{
         whiteMarkedDeadCell.toString should be("D")
         blackMarkedDeadCell.toString should be("D")
       }
+      "can be created from a String" in {
+        CellStatus.fromString("EMPTY") should be(Some(CellStatus.EMPTY))
+        CellStatus.fromString("BLACK") should be(Some(CellStatus.BLACK))
+        CellStatus.fromString("WHITE") should be(Some(CellStatus.WHITE))
+        CellStatus.fromString("BLACK_TERI") should be(Some(CellStatus.BLACK_TERI))
+        CellStatus.fromString("WHITE_TERI") should be(Some(CellStatus.WHITE_TERI))
+        CellStatus.fromString("BLACK_MARKED_DEAD") should be(Some(CellStatus.BLACK_MARKED_DEAD))
+        CellStatus.fromString("WHITE_MARKED_DEAD") should be(Some(CellStatus.WHITE_MARKED_DEAD))
+        CellStatus.fromString("STONE") should be(None)
+      }
     }
   }
 

@@ -30,6 +30,8 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
 
   //var evaluationGridRequest: Option[Grid] = None
   var gameStatus: GameStatus = NEXT_PLAYER
+  var scoreBlack = 0
+  var scoreWhite = 0
   private val undoManager = new UndoManager
   val gridEvaluationStrategy = new GridEvaluationChineseStrategy
   val injector = Guice.createInjector(new GoModule)
@@ -57,6 +59,20 @@ class Controller  @AssistedInject() (@Assisted var grid: GridInterface, @Assiste
   def statusToString: String = {
     gameStatus match {
       case NEXT_PLAYER => playerAtTurnToString + GameStatus.message(gameStatus)
+      case GAME_OVER =>
+        var (playerWhite, playerBlack) = if(player._1.cellstatus == CellStatus.WHITE) {
+          (player._1, player._2)
+        } else {
+          (player._2, player._1)
+        }
+        var winningString = if(scoreWhite > scoreBlack) {
+          playerWhite + " won the game"
+        } else if(scoreWhite < scoreBlack) {
+          playerBlack + " won the game"
+        } else {
+          "Draw, nobody won"
+        }
+        winningString + " with " + scoreBlack + " to " + scoreWhite + " Points"
       case _ => GameStatus.message(gameStatus)
     }
   }
