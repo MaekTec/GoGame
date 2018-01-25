@@ -1,11 +1,14 @@
 package de.htwg.se.djokajkaeppeler.model.fileIoComponent.fileIoJsonImpl
-/*
+
 import com.google.inject.Guice
 import com.google.inject.name.Names
+import de.htwg.se.djokajkaeppeler.controller.GameStatus.GameStatus
 import net.codingwell.scalaguice.InjectorExtensions._
-import de.htwg.se.sudoku.SudokuModule
+import de.htwg.se.djokajkaeppeler.GoModule
 import de.htwg.se.djokajkaeppeler.model.fileIoComponent.FileIOInterface
-import de.htwg.se.sudoku.model.gridComponent.{ CellInterface, GridInterface }
+import de.htwg.se.djokajkaeppeler.model.gridComponent.GridInterface
+import de.htwg.se.djokajkaeppeler.model.playerComponent.PlayerInterface
+import de.htwg.se.djokajkaeppeler.model.gridComponent.{CellInterface, GridInterface}
 import play.api.libs.json._
 
 import scala.io.Source
@@ -38,14 +41,14 @@ class FileIO extends FileIOInterface {
     grid
   }
 
-  override def save(grid: GridInterface): Unit = {
+  override def save(grid : GridInterface, state: GameStatus, player: (PlayerInterface,PlayerInterface)): Unit = {
     import java.io._
-    val pw = new PrintWriter(new File("grid.json"))
+    val pw = new PrintWriter(new File("Go.json"))
     pw.write(Json.prettyPrint(gridToJson(grid)))
     pw.close
   }
 
-  def gridToJson(grid: GridInterface) = {
+  def gridToJson(grid : GridInterface, state: GameStatus, player: (PlayerInterface,PlayerInterface)) = {
     Json.obj(
       "grid" -> Json.obj(
         "size" -> JsNumber(grid.size),
@@ -74,4 +77,3 @@ class FileIO extends FileIOInterface {
   }
 
 }
-*/
