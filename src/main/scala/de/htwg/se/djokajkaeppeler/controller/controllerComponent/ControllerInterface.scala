@@ -26,6 +26,8 @@ trait ControllerInterface extends Publisher{
   def undo: Unit
   def redo: Unit
   def toParseInts(c: String):String
+  def save(): Unit
+  def load(): Unit
 }
 
 trait ControllerFactory {

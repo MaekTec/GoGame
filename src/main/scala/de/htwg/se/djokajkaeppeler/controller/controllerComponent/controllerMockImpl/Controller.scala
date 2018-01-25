@@ -48,4 +48,9 @@ class Controller(var grid: GridInterface, var player: (PlayerInterface, PlayerIn
 
   def toParseInts(c: String):String = ""
 
+  def save: Unit = {}
+
+  def load: Unit = {}
+
+
 }

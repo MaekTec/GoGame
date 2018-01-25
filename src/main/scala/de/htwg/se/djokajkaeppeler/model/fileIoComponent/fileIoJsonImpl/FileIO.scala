@@ -1,5 +1,5 @@
 package de.htwg.se.djokajkaeppeler.model.fileIoComponent.fileIoJsonImpl
-
+/*
 import com.google.inject.Guice
 import com.google.inject.name.Names
 import net.codingwell.scalaguice.InjectorExtensions._
@@ -74,3 +74,4 @@ class FileIO extends FileIOInterface {
   }
 
 }
+*/
