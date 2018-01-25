@@ -67,6 +67,15 @@ class CellSpec extends WordSpec with Matchers{
         whiteMarkedDeadCell.reverse should be(Cell(CellStatus.BLACK_MARKED_DEAD))
         blackMarkedDeadCell.reverse should be(Cell(CellStatus.WHITE_MARKED_DEAD))
       }
+      "has a toString implementation" in {
+        emptyCell.toString should be("o")
+        whiteCell.toString should be("w")
+        blackCell.toString should be("b")
+        whiteTeriCell.toString should be("W")
+        blackTeriCell.toString should be("B")
+        whiteMarkedDeadCell.toString should be("D")
+        blackMarkedDeadCell.toString should be("D")
+      }
     }
   }
 

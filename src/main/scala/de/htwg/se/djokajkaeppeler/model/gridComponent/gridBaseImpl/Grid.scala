@@ -70,7 +70,7 @@ case class Grid @AssistedInject() (@Assisted cells:Matrix[CellInterface]) extend
       .filter(rc => rowColIsValid(rc._1, rc._2))
       .filter(rc => cellAt(rc._1, rc._2) == cellStatusReversed)) {
       checkIfCellHasFreedoms(cell._1, cell._2, cellStatusReversed, Set.empty) match {
-        case None => return None
+        case None => //return None
         case Some(c) => cells ++= c
       }
     }
