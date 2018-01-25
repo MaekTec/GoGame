@@ -1,0 +1,29 @@
+23:44:45.454 [main] INFO  de.htwg.se.djokajkaeppeler.aview.Tui - Eingabeformat:
+23:44:45.458 [main] INFO  de.htwg.se.djokajkaeppeler.aview.Tui - New game: n [Gridsize] [Player 1 name] [Player 2 name]
+23:44:45.458 [main] INFO  de.htwg.se.djokajkaeppeler.aview.Tui - In game: row colum
+23:44:45.828 [main] INFO  de.htwg.se.djokajkaeppeler.aview.Tui - 
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+| o | o | o | o | o | o | o | o | o | o | o |
+|---+---+---+---+---+---+---+---+---+---+---|
+
+23:44:45.828 [main] INFO  de.htwg.se.djokajkaeppeler.aview.Tui - Player 1 is at turn

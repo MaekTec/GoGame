@@ -49,7 +49,7 @@ class FileIO extends FileIOInterface {
 
 
 
-    val jsV: JsValue = Json.parse("" + (json \\ "cells").head + "")
+    val jsV: JsValue = Json.parse((json \\ "cells").head.toString())
     val cellNodes = jsV.validate[List[JsValue]].get
     for (cell <- cellNodes) {
       val row: Int = (cell \ "row").get.toString.toInt
