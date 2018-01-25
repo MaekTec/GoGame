@@ -1,17 +1,23 @@
 package de.htwg.se.djokajkaeppeler.aview
 
-import de.htwg.se.djokajkaeppeler.controller.Controller
-import de.htwg.se.djokajkaeppeler.util.Observer
+import de.htwg.se.djokajkaeppeler.controller.GameStatus
+import de.htwg.se.djokajkaeppeler.controller.GameStatus._
+import de.htwg.se.djokajkaeppeler.controller._
+import de.htwg.se.djokajkaeppeler.controller.controllerComponent.{ControllerInterface, GridSizeChanged, Played}
+import com.typesafe.scalalogging.{LazyLogging, Logger}
 
-class Tui(controller: Controller) extends Observer {
+import scala.swing.Reactor
 
-  controller.add(this)
+class Tui(controller: ControllerInterface) extends Reactor with LazyLogging {
+
+  listenTo(controller)
+
   val size = 11
   var players: (String, String) = ("Player 1", "Player 2")
 
-  println("Eingabeformat:")
-  println("New game: n [Gridsize] [Player 1 name] [Player 2 name]")
-  println("In game: row colum")
+  logger.info("Eingabeformat:")
+  logger.info("New game: n [Gridsize] [Player 1 name] [Player 2 name]")
+  logger.info("In game: row colum")
 
   def processInputLine(input: String): Unit = {
     val in = input.split(" ")
@@ -29,6 +35,8 @@ class Tui(controller: Controller) extends Observer {
           }
           controller.createEmptyGrid(newSize, player)
         }
+        case "z" => controller.undo
+        case "y" => controller.redo
         case "s" => controller.skipTurn()
         case _ => {
           processInputMove(in)
@@ -45,8 +53,18 @@ class Tui(controller: Controller) extends Observer {
     }
   }
 
-  override def update: Unit = {
-    println(controller.gridToString)
-    println(controller.playerAtTurnToString + " is at turn")
+  reactions += {
+    case event: GridSizeChanged => printGameTui
+    case event: Played     => printGameTui
+  }
+
+
+
+
+    def printGameTui: Unit = {
+      logger.info(controller.gridToString)
+      logger.info(controller.statusToString)
+
+    //controller.gameStatus=IDLE
   }
 }
