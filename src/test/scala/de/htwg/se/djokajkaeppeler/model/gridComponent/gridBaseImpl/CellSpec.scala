@@ -86,6 +86,25 @@ class CellSpec extends WordSpec with Matchers{
         CellStatus.fromString("WHITE_MARKED_DEAD") should be(Some(CellStatus.WHITE_MARKED_DEAD))
         CellStatus.fromString("STONE") should be(None)
       }
+      "can be converted to alive from teri" in {
+        blackTeriCell.toTeriReverse should be(Cell(CellStatus.BLACK))
+        whiteTeriCell.toTeriReverse should be(Cell(CellStatus.WHITE))
+      }
+      "can be marked as dead" in {
+        blackCell.toDead should be(Cell(CellStatus.BLACK_MARKED_DEAD))
+        whiteCell.toDead should be(Cell(CellStatus.WHITE_MARKED_DEAD))
+      }
+      "can made to alive" in {
+        blackMarkedDeadCell.toAlive should be(Cell(CellStatus.BLACK))
+        whiteMarkedDeadCell.toAlive should be(Cell(CellStatus.WHITE))
+      }
+      "can be marked as deasd or reverse" in {
+        whiteCell.toDeadOrReverse should be(Cell(CellStatus.WHITE_MARKED_DEAD))
+        blackCell.toDeadOrReverse should be(Cell(CellStatus.BLACK_MARKED_DEAD))
+        whiteMarkedDeadCell.toDeadOrReverse should be(Cell(CellStatus.WHITE))
+        blackMarkedDeadCell.toDeadOrReverse should be(Cell(CellStatus.BLACK))
+        blackMarkedDeadCell.toDeadOrReverse should be(Cell(CellStatus.BLACK))
+      }
     }
   }
 
